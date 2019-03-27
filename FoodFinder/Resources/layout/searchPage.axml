@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	tools:context=".SearchFragmentActual">
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/relativeLayout1">
+		<android.support.v7.widget.Toolbar
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/colorPrimary"
+			android:elevation="4dp"
+			android:id="@+id/toolbar1">
+			<Button
+				android:text="Location"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAllCaps="false"
+				android:textSize="14dp"
+				android:padding="2dp"
+				android:id="@+id/locationButton" />
+		</android.support.v7.widget.Toolbar>
+		<android.support.v7.widget.Toolbar
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/colorAccent"
+			android:elevation="4dp"
+			android:layout_below="@id/toolbar1"
+			android:id="@+id/toolbar2">
+			<RelativeLayout
+				android:minWidth="25px"
+				android:minHeight="25px"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:id="@+id/relativeLayout2">
+				<EditText
+					android:id="@+id/edittext"
+					android:layout_width="wrap_content"
+					android:imeOptions="actionGo"
+					android:inputType="text"
+					android:layout_height="wrap_content"
+					android:hint="Search by cuisine, category or dishes"
+					android:layout_centerHorizontal="true"
+					android:layout_centerInParent="true"
+					android:layout_alignParentLeft="true"  />
+			</RelativeLayout>
+		</android.support.v7.widget.Toolbar>
+		<LinearLayout
+			android:orientation="vertical"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/toolbar2"
+			android:id="@+id/linearLayout1">
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/infoText"
+				android:textSize="16dp" />
+			<TextView
+				android:text="Category"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/categoryTextView"
+				android:textStyle="bold"
+				android:textSize="18dp"
+				android:paddingLeft="5dp"
+				android:paddingTop="2dp"
+				android:paddingBottom="5dp" />
+			<TextView
+				android:text=""
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/categorySearchOption"
+				android:editable="false"
+				android:padding="5dp"
+				android:textSize="16dp" />
+			<TextView
+				android:text="Cuisine"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/cuisineTextView"
+				android:textStyle="bold"
+				android:textSize="18dp"
+				android:paddingLeft="5dp"
+				android:padding="5dp" />
+			<TextView
+				android:text=""
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/cuisineSearchOption"
+				android:padding="5dp"
+				android:textSize="16dp" />
+			<TextView
+				android:text="Dishes"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/dishesTextView"
+				android:textStyle="bold"
+				android:textSize="18dp"
+				android:padding="5dp"
+				android:paddingLeft="5dp" />
+			<TextView
+				android:text=""
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/dishesSearchOption"
+				android:padding="5dp"
+				android:textSize="16dp" />
+		</LinearLayout>
+	</RelativeLayout>
+</FrameLayout>

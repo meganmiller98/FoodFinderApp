@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".FragmentDialog">
+	<TextView
+		android:text="Sort By"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/textView2"
+		android:paddingLeft="5dp"
+		android:textSize="16dp" />
+	<CheckBox
+		android:text="Distance"
+		android:layout_width="200dp"
+		android:layout_height="wrap_content"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:id="@+id/distanceCheckBox" />
+	<CheckBox
+		android:text="Rating"
+		android:layout_width="200dp"
+		android:layout_height="wrap_content"
+		android:id="@+id/ratingCheckBox" />
+	<CheckBox
+		android:text="Most Popular"
+		android:layout_width="200dp"
+		android:layout_height="wrap_content"
+		android:id="@+id/mostPopularCheckBox" />
+	<CheckBox
+		android:text="Price: Low - High"
+		android:layout_width="200dp"
+		android:layout_height="wrap_content"
+		android:id="@+id/lowPriceCheckbox" />
+	<CheckBox
+		android:text="Price: High - Low"
+		android:layout_width="200dp"
+		android:layout_height="wrap_content"
+		android:id="@+id/highPriceCheckbox" />
+	<TextView
+		android:text="Dietary Requirements"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/textView1"
+		android:paddingLeft="5dp"
+		android:textSize="16dp" />
+	<CheckBox
+		android:text="Vegetarian"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/vegetarianCheckbox" />
+	<CheckBox
+		android:text="Vegan"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/veganCheckbox" />
+	<CheckBox
+		android:text="Gluten Free"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/glutenFreeCheckbox" />
+	<CheckBox
+		android:text="None"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/noneDietaryCheckbox" />
+	<Switch
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/openNowSwitch"
+		android:text="Open Now"
+		android:textSize="14dp"
+		android:paddingLeft="5dp"
+		android:paddingRight="5dp" />
+	<Button
+		android:text="APPLY"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/applyButton" />
+
+</LinearLayout>
