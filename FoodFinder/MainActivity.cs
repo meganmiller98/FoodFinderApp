@@ -8,6 +8,7 @@ using Android.Widget;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
+using Xamarin.Essentials;
 
 namespace FoodFinder
 {
@@ -25,7 +26,9 @@ namespace FoodFinder
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
+
             setFragment(homePage);
             textMessage = FindViewById<TextView>(Resource.Id.message);
             BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
@@ -61,11 +64,13 @@ namespace FoodFinder
             fragmentTransaction.Commit();
         }
 
-        /*public void hideKeyboard(View v)
+        //Found in https docs.microsoft.com/en-gb/xamarin/essentials/get-started?tabs=windows%2Candroid
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
-            Android.Views.InputMethods.InputMethodManager mgr = (Android.Views.InputMethods.InputMethodManager)GetSystemService(Context.INPUT_METHOD_SERVICE);
-            mgr.HideSoftInputFromWindow(EditText.getWindowToken(), 0);
-        }*/
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }
 

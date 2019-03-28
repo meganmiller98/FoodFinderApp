@@ -13,6 +13,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
 
 namespace FoodFinder
 {
@@ -49,6 +50,7 @@ namespace FoodFinder
 
             ListView listview = (ListView)view.FindViewById(Resource.Id.myListView);
             test = view.FindViewById<TextView>(Resource.Id.test);
+            getLocation();
 
             if (Arguments != null)
             {
@@ -86,12 +88,12 @@ namespace FoodFinder
         async void refineList(ListView listview, string value, string value2, string value3)
         {
             //myIp
-            string uri = "htp://192.168.0.20:45455/api/mainmenu/";
+            string uri = "http://192.168.0.20:45455/api/mainmenu/";
 
             //uni IP
             //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
 
-            //string uri = "http://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
             string otherhalf = "refinements?sort=" + value + "&dietary=" + value2 + "&openNow=" + value3;
 
             Uri result = null;
@@ -133,6 +135,36 @@ namespace FoodFinder
             fragmentTransaction.Commit();
             
         }
-      
+
+        async void getLocation()
+        {
+            try
+            {
+                var request = new GeolocationRequest(GeolocationAccuracy.High);
+                var location = await Geolocation.GetLocationAsync(request);
+
+                if (location != null)
+                {
+                    test.Text = location.Latitude.ToString() + " " + location.Longitude.ToString();
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                // Handle not enabled on device exception
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+            }
+            catch (Exception ex)
+            {
+                // Unable to get location
+            }
+        }
+
     }
 }
