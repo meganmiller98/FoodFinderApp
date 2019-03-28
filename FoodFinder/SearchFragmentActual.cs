@@ -21,7 +21,9 @@ namespace FoodFinder
         //TextView categoryTextView;
         EditText edittext;
         TextView dishesSearchOption;
-        TextView text;
+        TextView categorySearchOption;
+        TextView cuisineSearchOption;
+        //TextView text;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -47,10 +49,10 @@ namespace FoodFinder
             edittext = view.FindViewById<EditText>(Resource.Id.edittext);
 
             TextView categoryTextView = view.FindViewById<TextView>(Resource.Id.categoryTextView);
-            TextView categorySearchOption = view.FindViewById<TextView>(Resource.Id.categorySearchOption);
+            categorySearchOption = view.FindViewById<TextView>(Resource.Id.categorySearchOption);
 
             TextView cuisineTextView = view.FindViewById<TextView>(Resource.Id.cuisineTextView);
-            TextView cuisineSearchOption = view.FindViewById<TextView>(Resource.Id.cuisineSearchOption);
+            cuisineSearchOption = view.FindViewById<TextView>(Resource.Id.cuisineSearchOption);
 
             TextView dishesTextView = view.FindViewById<TextView>(Resource.Id.dishesTextView);
             dishesSearchOption = view.FindViewById<TextView>(Resource.Id.dishesSearchOption);
@@ -73,14 +75,50 @@ namespace FoodFinder
            };
 
             categorySearchOption.Click += category_click;
+            cuisineSearchOption.Click += cuisine_click;
+            dishesSearchOption.Click += dishes_click;
 
             return view;
         }
 
        void category_click(object sender, EventArgs e)
        {
-            dishesSearchOption.Text = "hellooooo";
+            string option = "category";
+            string searchedstring = categorySearchOption.Text;
+            createResultsFragment(option, searchedstring);
        }
+
+        void cuisine_click(object sender, EventArgs e)
+        {
+            string option = "cuisine";
+            string searchedstring = cuisineSearchOption.Text;
+            createResultsFragment(option, searchedstring);
+        }
+
+        void dishes_click(object sender, EventArgs e)
+        {
+            string option = "dishes";
+            string searchedstring = dishesSearchOption.Text;
+            createResultsFragment(option, searchedstring);
+        }
+
+        public void createResultsFragment(string option, string searchedString)
+        {
+            
+            searchResultsPage resultsPage = new searchResultsPage();
+
+            Bundle args = new Bundle();
+            args.PutString("option", option);
+            args.PutString("searchedString", searchedString);
+            resultsPage.Arguments = args;
+
+            //var fragmentTransaction = FragmentManager.BeginTransaction();
+            FragmentTransaction fragmentTransaction = this.Activity.FragmentManager.BeginTransaction();
+            fragmentTransaction.Replace(Resource.Id.frame, resultsPage);
+            fragmentTransaction.AddToBackStack("searchFragmentActual");
+            fragmentTransaction.Commit();
+
+        }
 
     }
 }

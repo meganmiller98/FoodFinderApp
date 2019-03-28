@@ -68,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchFragment.cs" />
     <Compile Include="SearchFragmentActual.cs" />
+    <Compile Include="searchResultsPage.cs" />
     <Compile Include="VoucherPage.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +163,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\testLayoutFragment.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\searchResultsPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

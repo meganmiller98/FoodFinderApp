@@ -74,9 +74,9 @@ namespace FoodFinder
             //uni IP
             //var result = (await httpClient.GetStringAsync("htp://10.201.37.145:45455/api/mainmenu/dayOfWeek?lon=56.456388&lat=-2.982268"));
             //my flat IP
-            //var result = (await httpClient.GetStringAsync("htp://192.168.0.20:45455/api/mainmenu/dayOfWeek?lon=56.456388&lat=-2.982268"));
+            var result = (await httpClient.GetStringAsync("http://192.168.0.20:45455/api/mainmenu/dayOfWeek?lon=56.456388&lat=-2.982268"));
             //Katy's IP
-            var result = (await httpClient.GetStringAsync("http://192.168.1.70:45455/api/mainmenu/dayOfWeek?lon=56.456388&lat=-2.982268"));
+            //var result = (await httpClient.GetStringAsync("htp://192.168.1.70:45455/api/mainmenu/dayOfWeek?lon=56.456388&lat=-2.982268"));
             List<Post> RestaurantList = JsonConvert.DeserializeObject<List<Post>>(result);
             myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
             listview.Adapter = adapter;
@@ -86,12 +86,12 @@ namespace FoodFinder
         async void refineList(ListView listview, string value, string value2, string value3)
         {
             //myIp
-            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
+            string uri = "htp://192.168.0.20:45455/api/mainmenu/";
 
             //uni IP
             //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
 
-            string uri = "http://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "http://192.168.1.70:45455/api/mainmenu/";
             string otherhalf = "refinements?sort=" + value + "&dietary=" + value2 + "&openNow=" + value3;
 
             Uri result = null;
@@ -127,7 +127,7 @@ namespace FoodFinder
 
             // The fragment will have the ID of Resource.Id.fragment_container.
             fragmentTransaction.Replace(Resource.Id.frame, prof);
-            //fragmentTransaction.AddToBackStack("HomePage");
+            fragmentTransaction.AddToBackStack("HomePage");
 
             // Commit the transaction.
             fragmentTransaction.Commit();
