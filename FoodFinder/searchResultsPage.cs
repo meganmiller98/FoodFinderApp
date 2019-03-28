@@ -53,7 +53,7 @@ namespace FoodFinder
                 }
                 else if(option == "cuisine")
                 {
-
+                    ShowCuisineResults(searchedString, listview);
                 }
                 else if (option == "dishes")
                 {
@@ -100,8 +100,42 @@ namespace FoodFinder
 
                 //test.Text = result.AbsoluteUri;
             }
-
         }
-    }
-    
+
+
+        async void ShowCuisineResults(string searchedString, ListView listview)
+        {
+            string value = "56.456388";
+            string value2 = "-2.982268";
+            //myIp
+            string uri = "http://192.168.0.20:45455/api/mainmenu/";
+
+            //uni IP
+            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+
+            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
+            string otherhalf = "GetRestaurantsAccordingToCuisines?lon=" + value + "&lat=" + value2 + "&cuisine=" + searchedString;
+
+            Uri result = null;
+
+            if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
+            {
+                var httpClient = new HttpClient();
+                var refineResult = (await httpClient.GetStringAsync(result));
+                List<Post> RestaurantList = JsonConvert.DeserializeObject<List<Post>>(refineResult);
+                if (RestaurantList.Count == 0)
+                {
+                    test.Text = "Sorry, no restaurants nearby with cuisine '" + searchedString + "'";
+                }
+                else
+                {
+                    test.Text = "Restaurants nearby with '" + searchedString + "' cuisine";
+                    myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
+                    listview.Adapter = adapter;
+                }
+
+                //test.Text = result.AbsoluteUri;
+            }
+        }
+    }    
 }
