@@ -52,7 +52,11 @@ namespace FoodFinder
                 //String value3 = Arguments.GetString("openNow");
                 test.Text = option + " " + searchedString;
 
-                if (option == "category")
+                if(Arguments.GetString("sort") != null && Arguments.GetString("dietary") != null && Arguments.GetString("openNow") != null && option == "category")
+                {
+                    test.Text = "sort stuff please";
+                }
+                else if (option == "category")
                 {
                     ShowCategoryResults(searchedString, listview);
                 }
@@ -69,6 +73,7 @@ namespace FoodFinder
             {
                 test.Text = "No Results!";
             }
+            refineButton.Click += button_Click; 
             return view;
         }
 
@@ -172,6 +177,19 @@ namespace FoodFinder
             }
         }
 
+        void button_Click(object sender, EventArgs e)
+        {
+            //show fragment
+            searchRefineDialog refineDialog = new searchRefineDialog();
+            Bundle args = new Bundle();
+            args.PutString("option", option);
+            args.PutString("searchedString", searchedString);
+            refineDialog.Arguments = args;
+            FragmentTransaction transcation = FragmentManager.BeginTransaction();
+            refineDialog.Show(transcation, "searchRefineDialog");
+
+        }
+
         async void getLastKnownLocation()
         {
             try
@@ -192,22 +210,48 @@ namespace FoodFinder
             catch (FeatureNotSupportedException fnsEx)
             {
                 // Handle not supported on device exception
-                test.Text = "ex1";
+                AlertDialog.Builder alert = new AlertDialog.Builder(Context as Activity);
+                alert.SetTitle("Failed");
+                alert.SetMessage(fnsEx.ToString());
+                alert.SetPositiveButton("Okay", (senderAlert, args) => {
+                    Toast.MakeText(Context as Activity, "Okay", ToastLength.Short).Show();
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
+
             }
             catch (FeatureNotEnabledException fneEx)
             {
-                // Handle not enabled on device exception
-                test.Text = "ex2";
+                AlertDialog.Builder alert = new AlertDialog.Builder(Context as Activity);
+                alert.SetTitle("Failed");
+                alert.SetMessage(fneEx.ToString());
+                alert.SetPositiveButton("Okay", (senderAlert, args) => {
+                    Toast.MakeText(Context as Activity, "Okay", ToastLength.Short).Show();
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
             }
             catch (PermissionException pEx)
             {
-                // Handle permission exception
-                test.Text = "ex3";
+                AlertDialog.Builder alert = new AlertDialog.Builder(Context as Activity);
+                alert.SetTitle("Failed");
+                alert.SetMessage(pEx.ToString());
+                alert.SetPositiveButton("Okay", (senderAlert, args) => {
+                    Toast.MakeText(Context as Activity, "Okay", ToastLength.Short).Show();
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
             }
             catch (Exception ex)
             {
-                // Unable to get location
-                test.Text = "ex4";
+                AlertDialog.Builder alert = new AlertDialog.Builder(Context as Activity);
+                alert.SetTitle("Failed");
+                alert.SetMessage(ex.ToString());
+                alert.SetPositiveButton("Okay", (senderAlert, args) => {
+                    Toast.MakeText(Context as Activity, "Okay", ToastLength.Short).Show();
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
             }
         }
     }

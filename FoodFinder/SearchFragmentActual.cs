@@ -77,7 +77,7 @@ namespace FoodFinder
             categorySearchOption.Click += category_click;
             cuisineSearchOption.Click += cuisine_click;
             dishesSearchOption.Click += dishes_click;
-
+          
             return view;
         }
 
