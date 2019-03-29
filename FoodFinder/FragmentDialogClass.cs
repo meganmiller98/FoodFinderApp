@@ -274,57 +274,8 @@ namespace FoodFinder
             fragmentTransaction.Replace(Resource.Id.frame, fragment);
             fragmentTransaction.Commit();
 
-            /* if(distanceBox.Checked)
-              {
-                  HomePage fragment = new HomePage();
-                  Bundle args = new Bundle();
-                  args.PutString("sort", "Distance");
-                  fragment.Arguments = args; 
-
-                  var fragmentTransaction = FragmentManager.BeginTransaction();
-                  fragmentTransaction.Replace(Resource.Id.frame, fragment);
-                  fragmentTransaction.Commit();
-
-
-              }
-             if(ratingBox.Checked)
-              {
-                  HomePage fragment = new HomePage();
-                  Bundle args = new Bundle();
-                  args.PutString("sort", "rating");
-                  fragment.Arguments = args;
-
-                  var fragmentTransaction = FragmentManager.BeginTransaction();
-                  fragmentTransaction.Replace(Resource.Id.frame, fragment);
-                  fragmentTransaction.Commit();
-
-              }
-             if(mostPopBox.Checked)
-              {
-                  HomePage fragment = new HomePage();
-                  Bundle args = new Bundle();
-                  args.PutString("sort", "popular");
-                  fragment.Arguments = args;
-
-                  var fragmentTransaction = FragmentManager.BeginTransaction();
-                  fragmentTransaction.Replace(Resource.Id.frame, fragment);
-                  fragmentTransaction.Commit();
-              }*/
 
         }
-
-      /*  public void onAttach(Context context)
-        {
-            base.OnAttach(context);
-            try
-            {
-                mOnInputSelected = (OnInputSelected) getTargetFragment(HomePage);
-            }catch (Exception e)
-            {
-                e.GetBaseException();
-            }*/
-
-
 
     }
 }

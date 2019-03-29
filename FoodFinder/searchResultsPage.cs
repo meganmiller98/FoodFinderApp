@@ -13,6 +13,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
 
 namespace FoodFinder
 {
@@ -20,6 +21,8 @@ namespace FoodFinder
     {
         string option;
         string searchedString;
+        string lon;
+        string lat;
         TextView test;
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -40,18 +43,20 @@ namespace FoodFinder
 
             test = view.FindViewById<TextView>(Resource.Id.test);
 
+            getLastKnownLocation();
+
             if (Arguments != null)
             {
                 option = Arguments.GetString("option");
                 searchedString = Arguments.GetString("searchedString");
                 //String value3 = Arguments.GetString("openNow");
-                test.Text = option + " " + searchedString ;
+                test.Text = option + " " + searchedString;
 
                 if (option == "category")
                 {
                     ShowCategoryResults(searchedString, listview);
                 }
-                else if(option == "cuisine")
+                else if (option == "cuisine")
                 {
                     ShowCuisineResults(searchedString, listview);
                 }
@@ -64,13 +69,11 @@ namespace FoodFinder
             {
                 test.Text = "No Results!";
             }
-            return view; 
+            return view;
         }
 
         async void ShowCategoryResults(string searchedString, ListView listview)
         {
-            string value = "56.456388";
-            string value2 = "-2.982268";
             //myIp
             string uri = "http://192.168.0.20:45455/api/mainmenu/";
 
@@ -78,7 +81,7 @@ namespace FoodFinder
             //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
 
             //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
-            string otherhalf = "GetRestaurantsAccordingToCategories?lon=" + value + "&lat=" + value2 + "&category=" + searchedString;
+            string otherhalf = "GetRestaurantsAccordingToCategories?lon=" + lon + "&lat=" + lat + "&category=" + searchedString;
 
             Uri result = null;
 
@@ -105,8 +108,6 @@ namespace FoodFinder
 
         async void ShowCuisineResults(string searchedString, ListView listview)
         {
-            string value = "56.456388";
-            string value2 = "-2.982268";
             //myIp
             string uri = "http://192.168.0.20:45455/api/mainmenu/";
 
@@ -114,7 +115,7 @@ namespace FoodFinder
             //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
 
             //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
-            string otherhalf = "GetRestaurantsAccordingToCuisines?lon=" + value + "&lat=" + value2 + "&cuisine=" + searchedString;
+            string otherhalf = "GetRestaurantsAccordingToCuisines?lon=" + lon + "&lat=" + lat + "&cuisine=" + searchedString;
 
             Uri result = null;
 
@@ -140,8 +141,6 @@ namespace FoodFinder
 
         async void ShowDishesResults(string searchedString, ListView listview)
         {
-            string value = "56.456388";
-            string value2 = "-2.982268";
             //myIp
             string uri = "http://192.168.0.20:45455/api/mainmenu/";
 
@@ -149,7 +148,7 @@ namespace FoodFinder
             //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
 
             //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
-            string otherhalf = "GetRestaurantsAccordingToDish?lon=" + value + "&lat=" + value2 + "&dish=" + searchedString;
+            string otherhalf = "GetRestaurantsAccordingToDish?lon=" + lon + "&lat=" + lat + "&dish=" + searchedString;
 
             Uri result = null;
 
@@ -172,5 +171,44 @@ namespace FoodFinder
                 //test.Text = result.AbsoluteUri;
             }
         }
-    }    
+
+        async void getLastKnownLocation()
+        {
+            try
+            {
+                var location = await Geolocation.GetLastKnownLocationAsync();
+
+                if (location != null)
+                {
+                    lat = location.Latitude.ToString();
+                    lon = location.Longitude.ToString();
+                    //test.Text = location.Latitude.ToString() + " " + location.Longitude.ToString();
+                }
+                else
+                {
+                    test.Text = "nothing to locate";
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+                test.Text = "ex1";
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                // Handle not enabled on device exception
+                test.Text = "ex2";
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+                test.Text = "ex3";
+            }
+            catch (Exception ex)
+            {
+                // Unable to get location
+                test.Text = "ex4";
+            }
+        }
+    }
 }

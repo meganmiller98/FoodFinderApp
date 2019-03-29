@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
- 
-using Android.Support.V7.Widget; 
+
+using Android.Support.V7.Widget;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -14,6 +14,7 @@ using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
+using System.Threading.Tasks;
 
 namespace FoodFinder
 {
@@ -22,6 +23,9 @@ namespace FoodFinder
         public ListView mListView;
         public TextView test;
         public string mParam1;
+        string lon;
+        string lat;
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -51,7 +55,8 @@ namespace FoodFinder
             ListView listview = (ListView)view.FindViewById(Resource.Id.myListView);
             test = view.FindViewById<TextView>(Resource.Id.test);
             getLocation();
-
+            getLastKnownLocation();
+            test.Text = lat + lon;
             if (Arguments != null)
             {
                 String value = Arguments.GetString("sort");
@@ -69,20 +74,24 @@ namespace FoodFinder
             
         }
 
-
         async void ExampleMethodAsync(ListView listview)
         {
-            var httpClient = new HttpClient();
-            //uni IP
-            //var result = (await httpClient.GetStringAsync("htp://10.201.37.145:45455/api/mainmenu/dayOfWeek?lon=56.456388&lat=-2.982268"));
-            //my flat IP
-            var result = (await httpClient.GetStringAsync("http://192.168.0.20:45455/api/mainmenu/dayOfWeek?lon=56.456388&lat=-2.982268"));
-            //Katy's IP
-            //var result = (await httpClient.GetStringAsync("htp://192.168.1.70:45455/api/mainmenu/dayOfWeek?lon=56.456388&lat=-2.982268"));
-            List<Post> RestaurantList = JsonConvert.DeserializeObject<List<Post>>(result);
-            myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
-            listview.Adapter = adapter;
+            
+            string uri = "http://192.168.0.20:45455/api/mainmenu/";
+            string otherhalf = "HomeResults?lat="+lat+"&lon="+lon;
+            test.Text = otherhalf;
+            Uri result = null;
 
+            if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
+            {
+                var httpClient = new HttpClient();
+                var refineResult = (await httpClient.GetStringAsync(result));
+                List<Post> RestaurantList = JsonConvert.DeserializeObject<List<Post>>(refineResult);
+                myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
+                listview.Adapter = adapter;
+                //test.Text = result.AbsoluteUri;
+
+            }
         }
 
         async void refineList(ListView listview, string value, string value2, string value3)
@@ -94,7 +103,8 @@ namespace FoodFinder
             //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
 
             //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
-            string otherhalf = "refinements?sort=" + value + "&dietary=" + value2 + "&openNow=" + value3;
+
+            string otherhalf = "refinements2?lat=" + lat + "&lon="+ lon + "&sort=" + value + "&dietary=" + value2 + "&openNow=" + value3;
 
             Uri result = null;
 
@@ -107,6 +117,7 @@ namespace FoodFinder
                 listview.Adapter = adapter;
 
                 //test.Text = result.AbsoluteUri;
+                
             }
 
         }
@@ -122,47 +133,139 @@ namespace FoodFinder
        void search_Click(object sender, EventArgs e)
         {
             FragmentTransaction fragmentTransaction = this.Activity.FragmentManager.BeginTransaction();
-
-            //SearchFragment prof = new SearchFragment();
-            //FragmentTest prof = new FragmentTest();
             SearchFragmentActual prof = new SearchFragmentActual();
-
-            // The fragment will have the ID of Resource.Id.fragment_container.
             fragmentTransaction.Replace(Resource.Id.frame, prof);
             fragmentTransaction.AddToBackStack("HomePage");
-
-            // Commit the transaction.
             fragmentTransaction.Commit();
             
+        }
+
+        async void getLastKnownLocation()
+        {
+            try
+            {
+                var location = await Geolocation.GetLastKnownLocationAsync();
+
+                if (location != null)
+                {
+                    lat = location.Latitude.ToString();
+                    lon = location.Longitude.ToString();
+                }
+                else
+                {
+                    test.Text = "Can't find location";
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+                AlertDialog.Builder alert = new AlertDialog.Builder(Context as Activity);
+                alert.SetTitle("Failed");
+                alert.SetMessage(fnsEx.ToString());
+                alert.SetPositiveButton("Okay", (senderAlert, args) => {
+                    Toast.MakeText(Context as Activity, "Okay", ToastLength.Short).Show();
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
+
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                AlertDialog.Builder alert = new AlertDialog.Builder(Context as Activity);
+                alert.SetTitle("Failed");
+                alert.SetMessage(fneEx.ToString());
+                alert.SetPositiveButton("Okay", (senderAlert, args) => {
+                    Toast.MakeText(Context as Activity, "Okay", ToastLength.Short).Show();
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
+            }
+            catch (PermissionException pEx)
+            {
+                AlertDialog.Builder alert = new AlertDialog.Builder(Context as Activity);
+                alert.SetTitle("Failed");
+                alert.SetMessage(pEx.ToString());
+                alert.SetPositiveButton("Okay", (senderAlert, args) => {
+                    Toast.MakeText(Context as Activity, "Okay", ToastLength.Short).Show();
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
+            }
+            catch (Exception ex)
+            {
+                AlertDialog.Builder alert = new AlertDialog.Builder(Context as Activity);
+                alert.SetTitle("Failed");
+                alert.SetMessage(ex.ToString());
+                alert.SetPositiveButton("Okay", (senderAlert, args) => {
+                    Toast.MakeText(Context as Activity, "Okay", ToastLength.Short).Show();
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
+            }
+        }
+
+        private Task AlertDialog(string v1, string message, string v2)
+        {
+            throw new NotImplementedException();
         }
 
         async void getLocation()
         {
             try
             {
-                var request = new GeolocationRequest(GeolocationAccuracy.High);
+                var request = new GeolocationRequest(GeolocationAccuracy.High, TimeSpan.FromSeconds(10));
                 var location = await Geolocation.GetLocationAsync(request);
 
                 if (location != null)
                 {
-                    test.Text = location.Latitude.ToString() + " " + location.Longitude.ToString();
+
                 }
             }
             catch (FeatureNotSupportedException fnsEx)
             {
                 // Handle not supported on device exception
+                AlertDialog.Builder alert = new AlertDialog.Builder(Context as Activity);
+                alert.SetTitle("Failed");
+                alert.SetMessage(fnsEx.ToString());
+                alert.SetPositiveButton("Okay", (senderAlert, args) => {
+                    Toast.MakeText(Context as Activity, "Okay", ToastLength.Short).Show();
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
+
             }
             catch (FeatureNotEnabledException fneEx)
             {
-                // Handle not enabled on device exception
+                AlertDialog.Builder alert = new AlertDialog.Builder(Context as Activity);
+                alert.SetTitle("Failed");
+                alert.SetMessage(fneEx.ToString());
+                alert.SetPositiveButton("Okay", (senderAlert, args) => {
+                    Toast.MakeText(Context as Activity, "Okay", ToastLength.Short).Show();
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
             }
             catch (PermissionException pEx)
             {
-                // Handle permission exception
+                AlertDialog.Builder alert = new AlertDialog.Builder(Context as Activity);
+                alert.SetTitle("Failed");
+                alert.SetMessage(pEx.ToString());
+                alert.SetPositiveButton("Okay", (senderAlert, args) => {
+                    Toast.MakeText(Context as Activity, "Okay", ToastLength.Short).Show();
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
             }
             catch (Exception ex)
             {
-                // Unable to get location
+                AlertDialog.Builder alert = new AlertDialog.Builder(Context as Activity);
+                alert.SetTitle("Failed");
+                alert.SetMessage(ex.ToString());
+                alert.SetPositiveButton("Okay", (senderAlert, args) => {
+                    Toast.MakeText(Context as Activity, "Okay", ToastLength.Short).Show();
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
             }
         }
 
