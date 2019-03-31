@@ -25,6 +25,9 @@ namespace FoodFinder
         public string mParam1;
         string lon;
         string lat;
+        string sort;
+        string dietary;
+        string openNow;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -59,11 +62,11 @@ namespace FoodFinder
             test.Text = lat + lon;
             if (Arguments != null)
             {
-                String value = Arguments.GetString("sort");
-                String value2 = Arguments.GetString("dietary");
-                String value3 = Arguments.GetString("openNow");
-                test.Text = value + " " + value2 + " " + value3;
-                refineList(listview, value, value2, value3);
+                sort = Arguments.GetString("sort");
+                dietary = Arguments.GetString("dietary");
+                openNow = Arguments.GetString("openNow");
+                test.Text = sort + " " + dietary + " " + openNow;
+                refineList(listview, sort, dietary, openNow);
             }
             else
             {
@@ -124,10 +127,14 @@ namespace FoodFinder
         void button_Click(object sender, EventArgs e)
         {
             //show fragment
-            FragmentTransaction transcation = FragmentManager.BeginTransaction();
             FragmentDialogClass refineDialog = new FragmentDialogClass();
+            Bundle args = new Bundle();
+            args.PutString("sort", sort);
+            args.PutString("dietary", dietary);
+            args.PutString("openNow", openNow);
+            refineDialog.Arguments = args;
+            FragmentTransaction transcation = FragmentManager.BeginTransaction();
             refineDialog.Show(transcation, "FragmentDialog");
-
         }
 
        void search_Click(object sender, EventArgs e)

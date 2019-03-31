@@ -115,7 +115,7 @@ namespace FoodFinder
             //var fragmentTransaction = FragmentManager.BeginTransaction();
             FragmentTransaction fragmentTransaction = this.Activity.FragmentManager.BeginTransaction();
             fragmentTransaction.Replace(Resource.Id.frame, resultsPage);
-            fragmentTransaction.AddToBackStack("searchFragmentActual");
+            fragmentTransaction.AddToBackStack("SearchFragmentActual");
             fragmentTransaction.Commit();
 
         }

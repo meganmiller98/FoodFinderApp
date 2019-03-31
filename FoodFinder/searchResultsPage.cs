@@ -24,6 +24,9 @@ namespace FoodFinder
         string lon;
         string lat;
         TextView test;
+        string sort;
+        string dietary;
+        string openNow;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -54,9 +57,32 @@ namespace FoodFinder
 
                 if(Arguments.GetString("sort") != null && Arguments.GetString("dietary") != null && Arguments.GetString("openNow") != null && option == "category")
                 {
-                    test.Text = "sort stuff please";
+                    sort = Arguments.GetString("sort");
+                    dietary = Arguments.GetString("dietary");
+                    openNow = Arguments.GetString("openNow");
+
+                    refineCategoryResults(listview);
+
                 }
-                else if (option == "category")
+                else if(Arguments.GetString("sort") != null && Arguments.GetString("dietary") != null && Arguments.GetString("openNow") != null && option == "cuisine")
+                {
+                    sort = Arguments.GetString("sort");
+                    dietary = Arguments.GetString("dietary");
+                    openNow = Arguments.GetString("openNow");
+
+                    refineCuisineResults(listview);
+
+                }
+                else if (Arguments.GetString("sort") != null && Arguments.GetString("dietary") != null && Arguments.GetString("openNow") != null && option == "dishes")
+                {
+                    sort = Arguments.GetString("sort");
+                    dietary = Arguments.GetString("dietary");
+                    openNow = Arguments.GetString("openNow");
+
+                    refineDishResults(listview);
+
+                }
+                else if  (Arguments.GetString("sort") == null && option == "category")
                 {
                     ShowCategoryResults(searchedString, listview);
                 }
@@ -101,7 +127,7 @@ namespace FoodFinder
                 }
                 else
                 {
-                    test.Text = "Restaurants nearby with the category '" + searchedString + "'";
+                    test.Text = "Restaurants nearby with the category '" + searchedString + " "+sort +"'";
                     myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
                     listview.Adapter = adapter;
                 }
@@ -177,16 +203,119 @@ namespace FoodFinder
             }
         }
 
+        async void refineCategoryResults(ListView listview)
+        {
+            //myIp
+            string uri = "http://192.168.0.20:45455/api/mainmenu/";
+
+            //uni IP
+            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+
+            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
+            string otherhalf = "CategoryRefinements?lat=" + lat + "&lon=" + lon + "&category=" + searchedString + "&sort=" +sort+ "&dietary=" +dietary+ "&openNow=" +openNow;
+
+            Uri result = null;
+
+            if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
+            {
+                var httpClient = new HttpClient();
+                var refineResult = (await httpClient.GetStringAsync(result));
+                List<Post> RestaurantList = JsonConvert.DeserializeObject<List<Post>>(refineResult);
+                if (RestaurantList.Count == 0)
+                {
+                    test.Text = "Sorry, no restaurants nearby with those refinements";
+                }
+                else
+                {
+                    test.Text = "Restaurants nearby with the category '" + searchedString +"'";
+                    myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
+                    listview.Adapter = adapter;
+                }
+
+                //test.Text = result.AbsoluteUri;
+            }
+        }
+
+        async void refineCuisineResults(ListView listview)
+        {
+            //myIp
+            string uri = "http://192.168.0.20:45455/api/mainmenu/";
+
+            //uni IP
+            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+
+            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
+            string otherhalf = "CuisineRefinements?lat=" + lat + "&lon=" + lon + "&cuisine=" + searchedString + "&sort=" + sort + "&dietary=" + dietary + "&openNow=" + openNow;
+
+            Uri result = null;
+
+            if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
+            {
+                var httpClient = new HttpClient();
+                var refineResult = (await httpClient.GetStringAsync(result));
+                List<Post> RestaurantList = JsonConvert.DeserializeObject<List<Post>>(refineResult);
+                if (RestaurantList.Count == 0)
+                {
+                    test.Text = "Sorry, no restaurants nearby with those refinements";
+                }
+                else
+                {
+                    test.Text = "Restaurants nearby with the cuisine '" + searchedString + "'";
+                    myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
+                    listview.Adapter = adapter;
+                }
+
+                //test.Text = result.AbsoluteUri;
+            }
+        }
+
+        async void refineDishResults(ListView listview)
+        {
+            //myIp
+            string uri = "http://192.168.0.20:45455/api/mainmenu/";
+
+            //uni IP
+            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+
+            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
+            string otherhalf = "DishRefinements?lat=" + lat + "&lon=" + lon + "&dish=" + searchedString + "&sort=" + sort + "&dietary=" + dietary + "&openNow=" + openNow;
+
+            Uri result = null;
+
+            if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
+            {
+                var httpClient = new HttpClient();
+                var refineResult = (await httpClient.GetStringAsync(result));
+                List<Post> RestaurantList = JsonConvert.DeserializeObject<List<Post>>(refineResult);
+                if (RestaurantList.Count == 0)
+                {
+                    test.Text = "Sorry, no restaurants nearby with those refinements";
+                }
+                else
+                {
+                    test.Text = "Restaurants nearby with the dish refine '" + searchedString + "'";
+                    myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
+                    listview.Adapter = adapter;
+                }
+
+                //test.Text = result.AbsoluteUri;
+            }
+        }
+
         void button_Click(object sender, EventArgs e)
         {
             //show fragment
             searchRefineDialog refineDialog = new searchRefineDialog();
             Bundle args = new Bundle();
+            args.PutString("sort", sort);
+            args.PutString("dietary", dietary);
+            args.PutString("openNow", openNow);
             args.PutString("option", option);
             args.PutString("searchedString", searchedString);
             refineDialog.Arguments = args;
             FragmentTransaction transcation = FragmentManager.BeginTransaction();
             refineDialog.Show(transcation, "searchRefineDialog");
+
 
         }
 

@@ -62,11 +62,74 @@ namespace FoodFinder
             applyButton = view.FindViewById<Button>(Resource.Id.applyButton);
             applyButton.Click += button_Click_Apply;
 
+            if(Arguments != null)
+            {
+                if(Arguments.GetString("sort") != null)
+                {
+                    if(Arguments.GetString("sort") == "distance")
+                    {
+                        distanceBox.Checked = true;
+                    }
+                    else if (Arguments.GetString("sort") == "rating")
+                    {
+                        ratingBox.Checked = true;
+                        veganBox.Checked = true;
+                    }
+                    else if (Arguments.GetString("sort") == "popular")
+                    {
+                        mostPopBox.Checked = true;
+                    }
+                    else if (Arguments.GetString("sort") == "low")
+                    {
+                        lowPriceBox.Checked = true;
+                    }
+                    else if (Arguments.GetString("sort") == "high")
+                    {
+                        highPriceBox.Checked = true;
+                    }
+                }
+                if(Arguments.GetString("dietary") != null)
+                {
+                    if(Arguments.GetString("dietary") == "vegan")
+                    {
+                        veganBox.Checked = true;
+                    }
+                    else if (Arguments.GetString("dietary") == "vegetarian")
+                    {
+                        vegetarianBox.Checked = true;
+                    }
+                    else if (Arguments.GetString("dietary") == "glutenfree")
+                    {
+                        glutenFreeBox.Checked = true;
+                    }
+                    else if (Arguments.GetString("dietary") == "none")
+                    {
+                        noDietary.Checked = true;
+                    }
+                }
+                if(Arguments.GetString("openNow") != null)
+                {
+                    if(Arguments.GetString("openNow") == "yes")
+                    {
+                        OpenNowSwitch.Checked = true;
+                    }
+                    else
+                    {
+                        OpenNowSwitch.Checked = false;
+                    }
+                }
+                if (Arguments.GetString("sort") == null && Arguments.GetString("dietary") == null && Arguments.GetString("openNow") == null)
+                {
+                    distanceBox.Checked = true;
+                    noDietary.Checked = true;
+                }
+            }
+            
             option = Arguments.GetString("option");
             searchedString = Arguments.GetString("searchedString");
 
-            distanceBox.Checked = true;
-            noDietary.Checked = true;
+            //distanceBox.Checked = true;
+            //noDietary.Checked = true;
 
             distanceBox.Click += (o, e) =>
             {
@@ -274,6 +337,10 @@ namespace FoodFinder
 
             var fragmentTransaction = FragmentManager.BeginTransaction();
             fragmentTransaction.Replace(Resource.Id.frame, fragment);
+            //CHECK IF  THIS IS ACCURATE
+            FragmentManager.PopBackStackImmediate();
+            fragmentTransaction.AddToBackStack("SearchFragmentActual");
+            //FragmentManager.PopBackStackImmediate();
             fragmentTransaction.Commit();
 
 
