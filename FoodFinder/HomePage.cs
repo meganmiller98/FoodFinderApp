@@ -28,6 +28,7 @@ namespace FoodFinder
         string sort;
         string dietary;
         string openNow;
+        private List<Post> RestaurantList;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -79,8 +80,9 @@ namespace FoodFinder
 
         async void ExampleMethodAsync(ListView listview)
         {
-            
+
             string uri = "http://192.168.0.20:45455/api/mainmenu/";
+            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
             string otherhalf = "HomeResults?lat="+lat+"&lon="+lon;
             test.Text = otherhalf;
             Uri result = null;
@@ -94,8 +96,18 @@ namespace FoodFinder
                 listview.Adapter = adapter;
                 //test.Text = result.AbsoluteUri;
 
+                listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+                {
+                    string restName = RestaurantList[e.Position].RestaurantName;
+                    Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                    Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
+                    intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
+                    StartActivity(intent);
+                };
+
             }
         }
+
 
         async void refineList(ListView listview, string value, string value2, string value3)
         {

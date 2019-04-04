@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+	<android.support.design.widget.AppBarLayout
+		android:id="@+id/app_bar_layout"
+		android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:color/transparent"
+		android:fitsSystemWindows="true">
+		
+		<android.support.design.widget.CollapsingToolbarLayout
+			android:layout_width="match_parent"
+			android:layout_height="400dp"
+			android:fitsSystemWindows="true"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed"
+			app:contentScrim="?android:attr/colorPrimary"
+			app:title=""
+			app:expandedTitleMarginStart="48dp"
+			app:expandedTitleMarginEnd="64dp"
+			android:background="@android:color/transparent">
+
+			
+			<android.support.v7.widget.Toolbar
+				android:id="@+id/toolbar"
+				app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+				app:layout_collapseMode="pin"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"/>
+			<RelativeLayout
+				android:fitsSystemWindows="true"
+				android:minWidth="25px"
+				android:minHeight="25px"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:id="@+id/relativeLayout1">
+				<ImageView
+					android:id="@+id/imageView"
+					android:layout_width="match_parent"
+					android:layout_height="200dp"
+					android:layout_marginLeft="5dp"
+					android:layout_marginRight="5dp"
+					android:layout_marginTop="0dp"
+					android:layout_marginBottom="2dp"
+					android:src="@android:drawable/ic_menu_gallery"
+					android:layout_centerHorizontal="true" />
+				<TextView
+					android:text="Restaurant Name"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/imageView"
+					android:id="@+id/textView1"
+					android:textStyle="bold"
+					android:textSize="18dp"
+					android:paddingBottom="5dp" />
+				<TextView
+					android:text="Cost"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/textView1"
+					android:id="@+id/textView2"
+					android:textSize="16dp"
+					android:paddingBottom="3dp" />
+				<TextView
+					android:text="Burgers"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/textView2"
+					android:id="@+id/textView3"
+					android:textSize="16dp"
+					android:paddingBottom="3dp" />
+				<RatingBar
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/ratingBar1"
+					android:layout_below="@id/textView3"
+					android:numStars="5"
+					android:stepSize="1" />
+			</RelativeLayout>
+			
+
+		</android.support.design.widget.CollapsingToolbarLayout>
+		<android.support.v7.widget.Toolbar
+				android:id="@+id/toolbarNav"
+				app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+				android:layout_width="match_parent"
+				android:background="#FEFEFE"
+				android:layout_height="0dp"/>	
+		<android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="bottom"
+            android:background="?attr/colorAccent"
+			app:tabSelectedTextColor="@android:color/white"
+			app:tabTextColor="@android:color/black"
+            app:tabMode="fixed"
+			app:tabGravity="fill">
+
+		</android.support.design.widget.TabLayout>
+	</android.support.design.widget.AppBarLayout>
+	<android.support.v4.view.ViewPager
+			android:id="@+id/viewPager"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/tabLayout"
+			app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+</android.support.design.widget.CoordinatorLayout>

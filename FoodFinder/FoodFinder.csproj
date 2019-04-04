@@ -56,16 +56,21 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Email.cs" />
     <Compile Include="FragmentDialogClass.cs" />
     <Compile Include="FragmentTest.cs" />
     <Compile Include="HomePage.cs" />
     <Compile Include="ImageHelper.cs" />
+    <Compile Include="InfoTabFragment.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MenuTabFragment.cs" />
     <Compile Include="myRestaurantListViewAdapter.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="ProfilePage.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestaurantInfo.cs" />
+    <Compile Include="RestaurantProfileActivity.cs" />
     <Compile Include="SearchFragment.cs" />
     <Compile Include="SearchFragmentActual.cs" />
     <Compile Include="searchRefineDialog.cs" />
@@ -178,6 +183,25 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\searchResultsPage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\InfoTab.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\MenuTab.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\testLayout.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\RestaurantProfileLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\infoLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
