@@ -15,6 +15,11 @@ namespace FoodFinder
 {
     public class PhotosFragment : Android.Support.V4.App.Fragment
     {
+        //private RecyclerView mRecyclerView;
+        //private RecyclerView.LayoutManager mLayoutManager;
+        //private RecyclerView.Adapter mAdapter;
+        //private List<MenuType> mMenuType;
+        //string getID;
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

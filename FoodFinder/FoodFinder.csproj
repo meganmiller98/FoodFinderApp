@@ -63,6 +63,7 @@
     <Compile Include="ImageHelper.cs" />
     <Compile Include="InfoTabFragment.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MenuDisplayActivity.cs" />
     <Compile Include="MenuItems.cs" />
     <Compile Include="MenuTabFragment.cs" />
     <Compile Include="MenuType.cs" />
@@ -244,6 +245,21 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_filtericon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\MenuTypeLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\MenuItemLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\MenuDisplayLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
