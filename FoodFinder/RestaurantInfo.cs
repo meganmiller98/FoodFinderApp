@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace FoodFinder
 {
-    class RestaurantInfo
+    public class RestaurantInfo
     {
             public string ID { get; set; }
             public string RestaurantName { get; set; }

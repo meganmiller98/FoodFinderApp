@@ -81,8 +81,9 @@ namespace FoodFinder
         async void ExampleMethodAsync(ListView listview)
         {
 
-            string uri = "http://192.168.0.20:45455/api/mainmenu/";
+            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
             //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+            string uri = "http://192.168.1.70:45455/api/mainmenu/";
             string otherhalf = "HomeResults?lat="+lat+"&lon="+lon;
             test.Text = otherhalf;
             Uri result = null;
@@ -112,12 +113,12 @@ namespace FoodFinder
         async void refineList(ListView listview, string value, string value2, string value3)
         {
             //myIp
-            string uri = "http://192.168.0.20:45455/api/mainmenu/";
+            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
 
             //uni IP
             //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
 
-            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
+            string uri = "http://192.168.1.70:45455/api/mainmenu/";
 
             string otherhalf = "refinements2?lat=" + lat + "&lon="+ lon + "&sort=" + value + "&dietary=" + value2 + "&openNow=" + value3;
 

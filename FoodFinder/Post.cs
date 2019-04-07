@@ -16,6 +16,7 @@ namespace FoodFinder
     
         public class Post
         {
+            public string ID { get; set; }
             public string MainPhoto1 { get; set; }
             public string RestaurantName { get; set; }
             public string Categories { get; set; }
@@ -28,8 +29,9 @@ namespace FoodFinder
 
             public string error { get; set; }
 
-            public Post (string MainPhoto1, string RestaurantName, string Categories, string Cuisines, string Address, string Opentimes, string CloseTimes, string Rating, string Cost, string error)
+            public Post (string ID, string MainPhoto1, string RestaurantName, string Categories, string Cuisines, string Address, string Opentimes, string CloseTimes, string Rating, string Cost, string error)
             {
+                this.ID = ID;
                 this.MainPhoto1 = MainPhoto1;
                 this.RestaurantName = RestaurantName;
                 this.Categories = Categories;

@@ -1,25 +1,276 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content">
+	android:layout_height="match_parent">
 	<TextView
-		android:text="Text"
+		android:text="Description"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:minWidth="25px"
 		android:minHeight="25px"
-		android:id="@+id/textView1" />
+		android:id="@+id/DescriptionHeader"
+		android:textSize="16dp"
+		android:textStyle="bold"/>
 	<TextView
-		android:text="Text"
+		android:text="Decription Default"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/DescriptionHeader"
+		android:id="@+id/description" />
+	<TextView
+		android:text="Opening Times"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/description"
+		android:id="@+id/OpenTimesHeader"
+		android:textStyle="bold"
+		android:textSize="16dp" />
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/textView2" />
-	<TextView
-		android:text="Text"
+		android:layout_below="@id/OpenTimesHeader"
+		android:id="@+id/relativeLayout1"
+		android:background="#ffe0e0e0">
+		<TextView
+			android:text="Monday"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/Monday"
+			android:textSize="14dp" />
+		<TextView
+			android:text="Open"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/Monday"
+			android:id="@+id/MondayOpen"
+			android:layout_marginLeft="150dp"
+			android:layout_marginRight="5dp" />
+		<TextView
+			android:text="Close"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/MondayOpen"
+			android:id="@+id/MondayClose"/>
+	</RelativeLayout>
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/textView3" />
+		android:layout_below="@id/relativeLayout1"
+		android:id="@+id/relativeLayout2" >
+		<TextView
+			android:text="Tuesday"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/Tuesday"
+			android:textSize="14dp" />
+		<TextView
+			android:text="Open"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/Tuesday"
+			android:id="@+id/TuesdayOpen"
+			android:layout_marginLeft="150dp"
+			android:layout_marginRight="5dp" />
+		<TextView
+			android:text="Close"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/TuesdayOpen"
+			android:id="@+id/TuesdayClose"/>
+	</RelativeLayout>
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/relativeLayout2"
+		android:id="@+id/relativeLayout3"
+		android:background="#ffe0e0e0">
+		<TextView
+			android:text="Wednesday"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/Wednesday"
+			android:textSize="14dp" />
+		<TextView
+			android:text="Open"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/Wednesday"
+			android:id="@+id/WednesdayOpen"
+			android:layout_marginLeft="125dp"
+			android:layout_marginRight="5dp" />
+		<TextView
+			android:text="Close"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/WednesdayOpen"
+			android:id="@+id/WednesdayClose"/>
+	</RelativeLayout>
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/relativeLayout3"
+		android:id="@+id/relativeLayout4" >
+		<TextView
+			android:text="Thursday"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/Thursday"
+			android:textSize="14dp" />
+		<TextView
+			android:text="Open"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/Thursday"
+			android:id="@+id/ThursdayOpen"
+			android:layout_marginLeft="150dp"
+			android:layout_marginRight="5dp" />
+		<TextView
+			android:text="Close"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/ThursdayOpen"
+			android:id="@+id/ThursdayClose"/>
+	</RelativeLayout>
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/relativeLayout4"
+		android:id="@+id/relativeLayout5"
+		android:background="#ffe0e0e0">
+		<TextView
+			android:text="Friday"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/Friday"
+			android:textSize="14dp" />
+		<TextView
+			android:text="Open"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/Friday"
+			android:id="@+id/FridayOpen"
+			android:layout_marginLeft="150dp" />
+		<TextView
+			android:text="Close"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/FridayOpen"
+			android:id="@+id/FridayClose"
+			android:layout_marginLeft="5dp" />
+	</RelativeLayout>
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/relativeLayout5"
+		android:id="@+id/relativeLayout6" >
+		<TextView
+			android:text="Saturday"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/Saturday"
+			android:textSize="14dp" />
+		<TextView
+			android:text="Open"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/Saturday"
+			android:id="@+id/SaturdayOpen"
+			android:layout_marginLeft="150dp"
+			android:layout_marginRight="5dp" />
+		<TextView
+			android:text="Close"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/SaturdayOpen"
+			android:id="@+id/SaturdayClose"/>
+	</RelativeLayout>
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/relativeLayout6"
+		android:id="@+id/relativeLayout7"
+		android:background="#ffe0e0e0">
+		<TextView
+			android:text="Sunday"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/Sunday"
+			android:textSize="14dp" />
+		<TextView
+			android:text="Open"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/Sunday"
+			android:id="@+id/SundayOpen"
+			android:layout_marginLeft="150dp"
+			android:layout_marginRight="5dp" />
+		<TextView
+			android:text="Close"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/SundayOpen"
+			android:id="@+id/SundayClose"/>
+	</RelativeLayout>
+	<TextView
+		android:text="Contact Info"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/relativeLayout7"
+		android:id="@+id/ContactInfoHeader"
+		android:textSize="16dp"
+		android:textStyle="bold" />
+	<LinearLayout
+		android:orientation="horizontal"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/ContactInfoHeader"
+		android:id="@+id/linearLayout1"
+		android:outlineProvider="none">
+		<ImageView
+			android:src="@android:drawable/ic_menu_gallery"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/imageView1" />
+		<TextView
+			android:text="Text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/ContactNumber"
+			android:layout_gravity="center_vertical"
+			android:textSize="14dp" />
+	</LinearLayout>
+	<TextView
+		android:text="Location"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/linearLayout1"
+		android:id="@+id/LocationHeader"
+		android:textSize="16dp"
+		android:textStyle="bold" />
+	<TextView
+		android:text="Address"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/LocationHeader"
+		android:id="@+id/Address" />
+	
 
-</LinearLayout>
+</RelativeLayout>

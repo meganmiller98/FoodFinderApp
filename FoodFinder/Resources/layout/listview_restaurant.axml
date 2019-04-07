@@ -7,14 +7,14 @@
 	<ImageView
 		android:src="@android:drawable/ic_menu_gallery"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="200dp"
 		android:minWidth="25px"
 		android:minHeight="25px"
 		android:id="@+id/RestaurantImage"
-		android:layout_marginLeft="5dp"
-		android:layout_marginRight="5dp"
-		android:layout_marginTop="5dp"
-		android:layout_marginBottom="2dp" />
+		android:layout_marginLeft="2dp"
+		android:layout_marginRight="2dp"
+		android:layout_marginTop="0dp"
+		android:layout_marginBottom="0dp" />
 	<TextView
 		android:text="Text"
 		android:layout_width="fill_parent"

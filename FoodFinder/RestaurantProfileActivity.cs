@@ -76,7 +76,7 @@ namespace FoodFinder
                 textview3.Text = restaurantInfo.Cuisines + " " + restaurantInfo.Categories;
             }
 
-            ID = "1";
+            ID = restaurantInfo.ID;
             
             SetSupportActionBar(toolbarNav);
             SetupViewPager(viewPager);
@@ -91,8 +91,10 @@ namespace FoodFinder
         void SetupViewPager(ViewPager viewPage)
         {
             var adapter = new Adapter(SupportFragmentManager);
-            adapter.AddFragment(new MenuTabFragment(), "MenuTab");
-            adapter.AddFragment(new InfoTabFragment(), "InfoTab");
+            adapter.AddFragment(new InfoTabFragment(), "Info");
+            adapter.AddFragment(new MenuTabFragment(), "Menu");
+            adapter.AddFragment(new PhotosFragment(), "Photos");
+            adapter.AddFragment(new RatingsFragment(), "Ratings");
             viewPage.Adapter = adapter;
             //viewPager.Adapter.NotifyDataSetChanged();
         }
