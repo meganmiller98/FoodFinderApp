@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Email.cs" />
+    <Compile Include="favedRestaurants.cs" />
     <Compile Include="FragmentDialogClass.cs" />
     <Compile Include="FragmentTest.cs" />
     <Compile Include="HomePage.cs" />
@@ -274,6 +275,12 @@
     <AndroidResource Include="Resources\layout\layoutLogIn.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_heartnotselected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\saveButtonSelect.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

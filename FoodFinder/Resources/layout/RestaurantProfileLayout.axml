@@ -82,8 +82,7 @@
 					android:numStars="5"
 					android:stepSize="1" />
 				<ImageButton
-					android:src="@drawable/ic_heartselected"
-					android:background= "@drawable/ic_heartselected"
+					android:background= "@drawable/saveButtonSelect"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_below="@id/ratingBar1"

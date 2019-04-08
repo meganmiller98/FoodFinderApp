@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 
 using Android.App;
@@ -21,6 +22,8 @@ namespace FoodFinder
     public class RestaurantProfileActivity : AppCompatActivity
     {
         public static string ID;
+        ImageButton saveButton;
+        List<favedRestaurants> mFavedRestaurants;
         //private string mID;
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -36,14 +39,15 @@ namespace FoodFinder
             TextView textview3 = FindViewById<TextView>(Resource.Id.textView3);
             RatingBar ratingBar = FindViewById<RatingBar>(Resource.Id.ratingBar1);
             Android.Support.Design.Widget.TabLayout tabLayout = FindViewById<Android.Support.Design.Widget.TabLayout>(Resource.Id.tabLayout);
+            saveButton = FindViewById<ImageButton>(Resource.Id.imageButton1);
             ViewPager viewPager = FindViewById<ViewPager>(Resource.Id.viewPager);
-
-            
 
             var restaurantInfo = JsonConvert.DeserializeObject<Post>(Intent.GetStringExtra("RestaurantInfo"));
 
             var imageBitmap = ImageHelper.GetImageBitmapFromUrl(restaurantInfo.MainPhoto1);
             imageView.SetImageBitmap(imageBitmap);
+
+            saveButton.Click += saveButtonClick;
 
             textview1.Text = restaurantInfo.RestaurantName;
             if (restaurantInfo.Cost == "1")
@@ -77,7 +81,7 @@ namespace FoodFinder
             }
 
             ID = restaurantInfo.ID;
-            
+
             SetSupportActionBar(toolbarNav);
             SetupViewPager(viewPager);
             
@@ -85,8 +89,52 @@ namespace FoodFinder
             //viewPager.Adapter = new MyFragmentAdapter(SupportFragmentManager, 4);
 
             viewPager.AddOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-            
-            
+            checkIfUserHasSavedRestaurant(ID);
+
+        }
+        async void checkIfUserHasSavedRestaurant(string ID)
+        {
+            ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+            string userID = prefs.GetString("userID", null);
+            //string userName = prefs.GetString("username", null);
+            //string password = prefs.GetString("password", null);
+
+            if (userID == null)
+            {
+                Toast.MakeText(this, "User Not Logged In", ToastLength.Short).Show();
+            }
+            else
+            {
+                mFavedRestaurants = new List<favedRestaurants>();
+                //myIp
+                //string uri = "htp://192.168.0.20:45455/api/Ratings/";
+
+                //uni IP
+                //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+
+                string uri = "http://192.168.1.70:45455/api/favouriteRestaurants/";
+
+                string otherhalf = "checkIfSaved?userID=" + userID + "&restaurantID=" + ID;
+                //string otherhalf = "checkIfSaved?userID=1&restaurantID=1";
+                Uri result = null;
+
+                if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
+                {
+                    var httpClient = new HttpClient();
+                    var refineResult = (await httpClient.GetStringAsync(result));
+                    mFavedRestaurants = JsonConvert.DeserializeObject<List<favedRestaurants>>(refineResult);
+
+                    if(mFavedRestaurants.Count > 0)
+                    {
+                        saveButton.Selected = true;
+                    }
+                    else
+                    {
+                        saveButton.Selected = false;
+                    }
+                }
+            }
+           
         }
         void SetupViewPager(ViewPager viewPage)
         {
@@ -102,7 +150,21 @@ namespace FoodFinder
         {
             return ID;
         }
- 
+        void saveButtonClick(object sender, EventArgs e)
+        {
+            Toast.MakeText(this, "Click", ToastLength.Short).Show();
+            if (saveButton.Selected == true)
+            {
+                saveButton.Selected = false;
+                Toast.MakeText(this, "true to false", ToastLength.Short).Show();
+            }
+            else
+            {
+                saveButton.Selected = true;
+                Toast.MakeText(this, "false to true", ToastLength.Short).Show();
+            }
+        }
+
     }
 
     public class Adapter : FragmentPagerAdapter
