@@ -32,7 +32,14 @@ namespace FoodFinder
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
 
             View view = inflater.Inflate(Resource.Layout.ProfilePage, container, false);
+            Login logIn = new Login();
+            FragmentTransaction fragmentTransaction = this.FragmentManager.BeginTransaction();
 
+            // The fragment will have the ID of Resource.Id.fragment_container.
+            fragmentTransaction.Replace(Resource.Id.profileFrame, logIn);
+
+            // Commit the transaction.
+            fragmentTransaction.Commit();
             return view;
         }
     }

@@ -5,15 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 	tools:context=".ProfilePage">
-	<TextView
-		android:text="Profile Page"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+	<FrameLayout
 		android:minWidth="25px"
 		android:minHeight="25px"
-		android:gravity="center"
-		android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-		android:id="@+id/textView1" />
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/profileFrame" />
+	
 
 
 </FrameLayout>

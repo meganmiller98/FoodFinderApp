@@ -50,10 +50,10 @@ namespace FoodFinder
             Android.Support.V7.Widget.Toolbar toolbar3 = view.FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar2);
             ImageButton refineButton = view.FindViewById<ImageButton>(Resource.Id.refineSearchButton);
             ImageButton searchButton = view.FindViewById<ImageButton>(Resource.Id.searchButton);
-            
+
             //Android.Widget.SearchView searchView = view.FindViewById<Android.Widget.SearchView>(Resource.Id.searchView1);
             //searchView.OnActionViewExpanded();
-            
+
             searchButton.Click += search_Click;
 
             ListView listview = (ListView)view.FindViewById(Resource.Id.myListView);

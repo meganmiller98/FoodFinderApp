@@ -62,12 +62,15 @@
     <Compile Include="HomePage.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="InfoTabFragment.cs" />
+    <Compile Include="Login.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MenuDisplayActivity.cs" />
     <Compile Include="MenuItems.cs" />
     <Compile Include="MenuTabFragment.cs" />
     <Compile Include="MenuType.cs" />
     <Compile Include="myRestaurantListViewAdapter.cs" />
+    <Compile Include="PhotoActivity.cs" />
+    <Compile Include="Photos.cs" />
     <Compile Include="PhotosFragment.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="ProfilePage.cs" />
@@ -81,6 +84,7 @@
     <Compile Include="SearchFragmentActual.cs" />
     <Compile Include="searchRefineDialog.cs" />
     <Compile Include="searchResultsPage.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="VoucherPage.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -258,6 +262,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\MenuDisplayLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\PhotoActivityLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\layoutLogIn.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
