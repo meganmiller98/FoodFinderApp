@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 
 using Android.App;
@@ -96,8 +98,6 @@ namespace FoodFinder
         {
             ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
             string userID = prefs.GetString("userID", null);
-            //string userName = prefs.GetString("username", null);
-            //string password = prefs.GetString("password", null);
 
             if (userID == null)
             {
@@ -153,18 +153,83 @@ namespace FoodFinder
         void saveButtonClick(object sender, EventArgs e)
         {
             Toast.MakeText(this, "Click", ToastLength.Short).Show();
+            ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+            string userID = prefs.GetString("userID", null);
             if (saveButton.Selected == true)
             {
                 saveButton.Selected = false;
                 Toast.MakeText(this, "true to false", ToastLength.Short).Show();
+                
+
+                if (userID == null)
+                {
+                    Toast.MakeText(this, "User Not Logged In", ToastLength.Short).Show();
+                }
+                else
+                {
+                    deleteSavedRestaurant(userID);
+                }
             }
             else
             {
                 saveButton.Selected = true;
                 Toast.MakeText(this, "false to true", ToastLength.Short).Show();
+                if (userID == null)
+                {
+                    Toast.MakeText(this, "User Not Logged In", ToastLength.Short).Show();
+                }
+                else
+                {
+                    saveRestaurant(userID);
+                }
+            }
+        }
+        async void deleteSavedRestaurant(string userID)
+        {
+            string uri = "http://192.168.1.70:45455/api/favouriteRestaurants/";
+
+            string otherhalf = "deleteSaved?userID=" + userID + "&restaurantID=" + ID;
+            //string otherhalf = "checkIfSaved?userID=1&restaurantID=1";
+            Uri result = null;
+
+            if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
+            {
+                var httpClient = new HttpClient();
+                var refineResult = (await httpClient.DeleteAsync(result));
+                if (refineResult.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("successfully deleted.");
+                    Toast.MakeText(this, "Removed from favourites", ToastLength.Short).Show();
+                }
             }
         }
 
+        async void saveRestaurant(string userID)
+        {
+            favedRestaurants fav = new favedRestaurants(userID, ID, null);
+            
+            string uri = "http://192.168.1.70:45455/api/favouriteRestaurants/Save";
+
+            Uri result = new Uri(uri);
+            Console.WriteLine(result);
+            var httpClient = new HttpClient();
+
+            var content = new StringContent(JsonConvert.SerializeObject(fav));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpResponseMessage refineResult = (await httpClient.PostAsync(result, content));
+
+            //await HandleResponse(refineResult);
+            string serialized = await refineResult.Content.ReadAsStringAsync();
+            Console.WriteLine(serialized);
+            if (refineResult.IsSuccessStatusCode)
+            {
+                Toast.MakeText(this, "Added to favourites", ToastLength.Short).Show();
+            }
+            else
+            {
+                Toast.MakeText(this, "Something went wrong", ToastLength.Short).Show();
+            }
+        }
     }
 
     public class Adapter : FragmentPagerAdapter
