@@ -64,6 +64,7 @@
     <Compile Include="ImageHelper.cs" />
     <Compile Include="InfoTabFragment.cs" />
     <Compile Include="Login.cs" />
+    <Compile Include="LogInActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MenuDisplayActivity.cs" />
     <Compile Include="MenuItems.cs" />
@@ -281,6 +282,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\saveButtonSelect.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cursor.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

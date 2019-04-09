@@ -6,6 +6,7 @@ using System.Text;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Preferences;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
@@ -33,7 +34,18 @@ namespace FoodFinder
 
             View view = inflater.Inflate(Resource.Layout.VoucherPage, container, false);
 
+            Button logOut = view.FindViewById<Button>(Resource.Id.button1);
+
+            logOut.Click += logOutClicked;
+
             return view;
+        }
+        void logOutClicked(object sender, EventArgs e)
+        {
+            ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+            ISharedPreferencesEditor editer = prefs.Edit();
+            editer.Clear();
+            editer.Apply();
         }
     }
 }

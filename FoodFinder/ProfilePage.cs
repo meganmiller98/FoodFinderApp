@@ -32,14 +32,18 @@ namespace FoodFinder
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
 
             View view = inflater.Inflate(Resource.Layout.ProfilePage, container, false);
-            Login logIn = new Login();
-            FragmentTransaction fragmentTransaction = this.FragmentManager.BeginTransaction();
 
-            // The fragment will have the ID of Resource.Id.fragment_container.
-            fragmentTransaction.Replace(Resource.Id.profileFrame, logIn);
+            ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+            string userID = prefs.GetString("userID", null);
+            string userName = prefs.GetString("username", null);
+            string password = prefs.GetString("password", null);
 
-            // Commit the transaction.
-            fragmentTransaction.Commit();
+            if(userID == null)
+            {
+                Intent intent = new Intent(Context as Activity, typeof(LogInActivity));
+                //intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(restaurantInfo);
+                StartActivity(intent);
+            }
             return view;
         }
     }

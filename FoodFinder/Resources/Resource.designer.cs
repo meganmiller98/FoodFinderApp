@@ -2344,26 +2344,26 @@ namespace FoodFinder
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f020077
-			public const int avd_hide_password_1 = 2130837623;
-			
 			// aapt resource value: 0x7f020078
-			public const int avd_hide_password_2 = 2130837624;
+			public const int avd_hide_password_1 = 2130837624;
 			
 			// aapt resource value: 0x7f020079
-			public const int avd_hide_password_3 = 2130837625;
+			public const int avd_hide_password_2 = 2130837625;
+			
+			// aapt resource value: 0x7f02007a
+			public const int avd_hide_password_3 = 2130837626;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f02007a
-			public const int avd_show_password_1 = 2130837626;
-			
 			// aapt resource value: 0x7f02007b
-			public const int avd_show_password_2 = 2130837627;
+			public const int avd_show_password_1 = 2130837627;
 			
 			// aapt resource value: 0x7f02007c
-			public const int avd_show_password_3 = 2130837628;
+			public const int avd_show_password_2 = 2130837628;
+			
+			// aapt resource value: 0x7f02007d
+			public const int avd_show_password_3 = 2130837629;
 			
 			// aapt resource value: 0x7f020055
 			public const int baseline_search_24 = 2130837589;
@@ -2372,100 +2372,103 @@ namespace FoodFinder
 			public const int border = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int design_bottom_navigation_item_background = 2130837591;
+			public const int cursor = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int design_fab_background = 2130837592;
+			public const int design_bottom_navigation_item_background = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int design_ic_visibility = 2130837593;
+			public const int design_fab_background = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int design_ic_visibility_off = 2130837594;
+			public const int design_ic_visibility = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int design_password_eye = 2130837595;
+			public const int design_ic_visibility_off = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int design_snackbar_background = 2130837596;
+			public const int design_password_eye = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int ic_dashboard_black_24dp = 2130837597;
+			public const int design_snackbar_background = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int ic_filter = 2130837598;
+			public const int ic_dashboard_black_24dp = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int ic_filtericon = 2130837599;
+			public const int ic_filter = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int ic_heart_full = 2130837600;
+			public const int ic_filtericon = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int ic_heartnotselected = 2130837601;
+			public const int ic_heart_full = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int ic_heartselected = 2130837602;
+			public const int ic_heartnotselected = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int ic_home_black_24dp = 2130837603;
+			public const int ic_heartselected = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int ic_notifications_black_24dp = 2130837604;
+			public const int ic_home_black_24dp = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int ic_search = 2130837605;
+			public const int ic_notifications_black_24dp = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int ic_smallsearch = 2130837606;
+			public const int ic_search = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int navigation_empty_icon = 2130837607;
+			public const int ic_smallsearch = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int notification_action_background = 2130837608;
+			public const int navigation_empty_icon = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int notification_bg = 2130837609;
+			public const int notification_action_background = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int notification_bg_low = 2130837610;
+			public const int notification_bg = 2130837610;
 			
 			// aapt resource value: 0x7f02006b
-			public const int notification_bg_low_normal = 2130837611;
+			public const int notification_bg_low = 2130837611;
 			
 			// aapt resource value: 0x7f02006c
-			public const int notification_bg_low_pressed = 2130837612;
+			public const int notification_bg_low_normal = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int notification_bg_normal = 2130837613;
+			public const int notification_bg_low_pressed = 2130837613;
 			
 			// aapt resource value: 0x7f02006e
-			public const int notification_bg_normal_pressed = 2130837614;
+			public const int notification_bg_normal = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int notification_icon_background = 2130837615;
-			
-			// aapt resource value: 0x7f020075
-			public const int notification_template_icon_bg = 2130837621;
-			
-			// aapt resource value: 0x7f020076
-			public const int notification_template_icon_low_bg = 2130837622;
+			public const int notification_bg_normal_pressed = 2130837615;
 			
 			// aapt resource value: 0x7f020070
-			public const int notification_tile_bg = 2130837616;
+			public const int notification_icon_background = 2130837616;
+			
+			// aapt resource value: 0x7f020076
+			public const int notification_template_icon_bg = 2130837622;
+			
+			// aapt resource value: 0x7f020077
+			public const int notification_template_icon_low_bg = 2130837623;
 			
 			// aapt resource value: 0x7f020071
-			public const int notify_panel_notification_icon_bg = 2130837617;
+			public const int notification_tile_bg = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int saveButtonSelect = 2130837618;
+			public const int notify_panel_notification_icon_bg = 2130837618;
 			
 			// aapt resource value: 0x7f020073
-			public const int tooltip_frame_dark = 2130837619;
+			public const int saveButtonSelect = 2130837619;
 			
 			// aapt resource value: 0x7f020074
-			public const int tooltip_frame_light = 2130837620;
+			public const int tooltip_frame_dark = 2130837620;
+			
+			// aapt resource value: 0x7f020075
+			public const int tooltip_frame_light = 2130837621;
 			
 			static Drawable()
 			{
@@ -2528,8 +2531,8 @@ namespace FoodFinder
 			// aapt resource value: 0x7f0900b3
 			public const int MondayOpen = 2131296435;
 			
-			// aapt resource value: 0x7f0900f6
-			public const int Name = 2131296502;
+			// aapt resource value: 0x7f0900f5
+			public const int Name = 2131296501;
 			
 			// aapt resource value: 0x7f0900b1
 			public const int OpenTimesHeader = 2131296433;
@@ -2669,8 +2672,8 @@ namespace FoodFinder
 			// aapt resource value: 0x7f090038
 			public const int always = 2131296312;
 			
-			// aapt resource value: 0x7f0900f8
-			public const int app_bar_layout = 2131296504;
+			// aapt resource value: 0x7f0900f7
+			public const int app_bar_layout = 2131296503;
 			
 			// aapt resource value: 0x7f0900a7
 			public const int applyButton = 2131296423;
@@ -2699,11 +2702,11 @@ namespace FoodFinder
 			// aapt resource value: 0x7f0900e6
 			public const int cancel_action = 2131296486;
 			
-			// aapt resource value: 0x7f090104
-			public const int categorySearchOption = 2131296516;
+			// aapt resource value: 0x7f090102
+			public const int categorySearchOption = 2131296514;
 			
-			// aapt resource value: 0x7f090103
-			public const int categoryTextView = 2131296515;
+			// aapt resource value: 0x7f090101
+			public const int categoryTextView = 2131296513;
 			
 			// aapt resource value: 0x7f090045
 			public const int center = 2131296325;
@@ -2738,11 +2741,11 @@ namespace FoodFinder
 			// aapt resource value: 0x7f090090
 			public const int coordinator = 2131296400;
 			
-			// aapt resource value: 0x7f090106
-			public const int cuisineSearchOption = 2131296518;
+			// aapt resource value: 0x7f090104
+			public const int cuisineSearchOption = 2131296516;
 			
-			// aapt resource value: 0x7f090105
-			public const int cuisineTextView = 2131296517;
+			// aapt resource value: 0x7f090103
+			public const int cuisineTextView = 2131296515;
 			
 			// aapt resource value: 0x7f09006d
 			public const int custom = 2131296365;
@@ -2786,11 +2789,11 @@ namespace FoodFinder
 			// aapt resource value: 0x7f0900df
 			public const int dishPrice = 2131296479;
 			
-			// aapt resource value: 0x7f090108
-			public const int dishesSearchOption = 2131296520;
+			// aapt resource value: 0x7f090106
+			public const int dishesSearchOption = 2131296518;
 			
-			// aapt resource value: 0x7f090107
-			public const int dishesTextView = 2131296519;
+			// aapt resource value: 0x7f090105
+			public const int dishesTextView = 2131296517;
 			
 			// aapt resource value: 0x7f09009c
 			public const int distanceCheckBox = 2131296412;
@@ -2798,8 +2801,8 @@ namespace FoodFinder
 			// aapt resource value: 0x7f09007e
 			public const int edit_query = 2131296382;
 			
-			// aapt resource value: 0x7f090101
-			public const int edittext = 2131296513;
+			// aapt resource value: 0x7f0900ff
+			public const int edittext = 2131296511;
 			
 			// aapt resource value: 0x7f090030
 			public const int end = 2131296304;
@@ -2867,11 +2870,11 @@ namespace FoodFinder
 			// aapt resource value: 0x7f09005f
 			public const int image = 2131296351;
 			
-			// aapt resource value: 0x7f0900fc
-			public const int imageButton1 = 2131296508;
+			// aapt resource value: 0x7f0900fb
+			public const int imageButton1 = 2131296507;
 			
-			// aapt resource value: 0x7f0900fa
-			public const int imageView = 2131296506;
+			// aapt resource value: 0x7f0900f9
+			public const int imageView = 2131296505;
 			
 			// aapt resource value: 0x7f0900ce
 			public const int imageView1 = 2131296462;
@@ -2879,8 +2882,8 @@ namespace FoodFinder
 			// aapt resource value: 0x7f0900ef
 			public const int info = 2131296495;
 			
-			// aapt resource value: 0x7f090102
-			public const int infoText = 2131296514;
+			// aapt resource value: 0x7f090100
+			public const int infoText = 2131296512;
 			
 			// aapt resource value: 0x7f090059
 			public const int italic = 2131296345;
@@ -2909,14 +2912,14 @@ namespace FoodFinder
 			// aapt resource value: 0x7f090061
 			public const int list_item = 2131296353;
 			
-			// aapt resource value: 0x7f090100
-			public const int locationButton = 2131296512;
+			// aapt resource value: 0x7f090107
+			public const int locationButton = 2131296519;
 			
 			// aapt resource value: 0x7f09009f
 			public const int lowPriceCheckbox = 2131296415;
 			
-			// aapt resource value: 0x7f09010d
-			public const int masked = 2131296525;
+			// aapt resource value: 0x7f09010c
+			public const int masked = 2131296524;
 			
 			// aapt resource value: 0x7f0900e8
 			public const int media_actions = 2131296488;
@@ -2924,8 +2927,8 @@ namespace FoodFinder
 			// aapt resource value: 0x7f0900e1
 			public const int menuType = 2131296481;
 			
-			// aapt resource value: 0x7f09010b
-			public const int message = 2131296523;
+			// aapt resource value: 0x7f09010a
+			public const int message = 2131296522;
 			
 			// aapt resource value: 0x7f090031
 			public const int middle = 2131296305;
@@ -2945,17 +2948,17 @@ namespace FoodFinder
 			// aapt resource value: 0x7f09008c
 			public const int navigation = 2131296396;
 			
-			// aapt resource value: 0x7f09010f
-			public const int navigation_dashboard = 2131296527;
+			// aapt resource value: 0x7f09010e
+			public const int navigation_dashboard = 2131296526;
 			
 			// aapt resource value: 0x7f090095
 			public const int navigation_header_container = 2131296405;
 			
-			// aapt resource value: 0x7f09010e
-			public const int navigation_home = 2131296526;
+			// aapt resource value: 0x7f09010d
+			public const int navigation_home = 2131296525;
 			
-			// aapt resource value: 0x7f090110
-			public const int navigation_notifications = 2131296528;
+			// aapt resource value: 0x7f09010f
+			public const int navigation_notifications = 2131296527;
 			
 			// aapt resource value: 0x7f09003b
 			public const int never = 2131296315;
@@ -2999,9 +3002,6 @@ namespace FoodFinder
 			// aapt resource value: 0x7f09004d
 			public const int pin = 2131296333;
 			
-			// aapt resource value: 0x7f0900f5
-			public const int profileFrame = 2131296501;
-			
 			// aapt resource value: 0x7f090006
 			public const int progress_circular = 2131296262;
 			
@@ -3011,8 +3011,8 @@ namespace FoodFinder
 			// aapt resource value: 0x7f090075
 			public const int radio = 2131296373;
 			
-			// aapt resource value: 0x7f0900f7
-			public const int ratingBar1 = 2131296503;
+			// aapt resource value: 0x7f0900f6
+			public const int ratingBar1 = 2131296502;
 			
 			// aapt resource value: 0x7f09009d
 			public const int ratingCheckBox = 2131296413;
@@ -3020,8 +3020,8 @@ namespace FoodFinder
 			// aapt resource value: 0x7f0900d2
 			public const int recyclerView1 = 2131296466;
 			
-			// aapt resource value: 0x7f09010a
-			public const int refineButton = 2131296522;
+			// aapt resource value: 0x7f090109
+			public const int refineButton = 2131296521;
 			
 			// aapt resource value: 0x7f0900ab
 			public const int refineSearchButton = 2131296427;
@@ -3086,8 +3086,8 @@ namespace FoodFinder
 			// aapt resource value: 0x7f0900ac
 			public const int searchButton = 2131296428;
 			
-			// aapt resource value: 0x7f090109
-			public const int searchRefineToolbar = 2131296521;
+			// aapt resource value: 0x7f090108
+			public const int searchRefineToolbar = 2131296520;
 			
 			// aapt resource value: 0x7f090080
 			public const int search_badge = 2131296384;
@@ -3173,8 +3173,8 @@ namespace FoodFinder
 			// aapt resource value: 0x7f090087
 			public const int submit_area = 2131296391;
 			
-			// aapt resource value: 0x7f0900fe
-			public const int tabLayout = 2131296510;
+			// aapt resource value: 0x7f0900fd
+			public const int tabLayout = 2131296509;
 			
 			// aapt resource value: 0x7f09001f
 			public const int tabMode = 2131296287;
@@ -3203,8 +3203,8 @@ namespace FoodFinder
 			// aapt resource value: 0x7f09009b
 			public const int textView2 = 2131296411;
 			
-			// aapt resource value: 0x7f0900fb
-			public const int textView3 = 2131296507;
+			// aapt resource value: 0x7f0900fa
+			public const int textView3 = 2131296506;
 			
 			// aapt resource value: 0x7f09009a
 			public const int text_input_password_toggle = 2131296410;
@@ -3227,8 +3227,8 @@ namespace FoodFinder
 			// aapt resource value: 0x7f09006f
 			public const int title_template = 2131296367;
 			
-			// aapt resource value: 0x7f0900f9
-			public const int toolbar = 2131296505;
+			// aapt resource value: 0x7f0900f8
+			public const int toolbar = 2131296504;
 			
 			// aapt resource value: 0x7f0900d3
 			public const int toolbar1 = 2131296467;
@@ -3236,8 +3236,8 @@ namespace FoodFinder
 			// aapt resource value: 0x7f0900a9
 			public const int toolbar2 = 2131296425;
 			
-			// aapt resource value: 0x7f0900fd
-			public const int toolbarNav = 2131296509;
+			// aapt resource value: 0x7f0900fc
+			public const int toolbarNav = 2131296508;
 			
 			// aapt resource value: 0x7f0900d4
 			public const int toolbar_title = 2131296468;
@@ -3284,14 +3284,14 @@ namespace FoodFinder
 			// aapt resource value: 0x7f0900a2
 			public const int vegetarianCheckbox = 2131296418;
 			
-			// aapt resource value: 0x7f0900ff
-			public const int viewPager = 2131296511;
+			// aapt resource value: 0x7f0900fe
+			public const int viewPager = 2131296510;
 			
 			// aapt resource value: 0x7f090016
 			public const int view_offset_helper = 2131296278;
 			
-			// aapt resource value: 0x7f09010c
-			public const int visible = 2131296524;
+			// aapt resource value: 0x7f09010b
+			public const int visible = 2131296523;
 			
 			// aapt resource value: 0x7f09003c
 			public const int withText = 2131296316;

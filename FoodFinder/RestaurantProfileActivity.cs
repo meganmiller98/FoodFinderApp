@@ -26,32 +26,44 @@ namespace FoodFinder
         public static string ID;
         ImageButton saveButton;
         List<favedRestaurants> mFavedRestaurants;
+        RatingBar ratingBar;
         //private string mID;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.RestaurantProfileLayout);
-            // Create your application here
+
             Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+
             Android.Support.V7.Widget.Toolbar toolbarNav = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbarNav);
+
             ImageView imageView = FindViewById<ImageView>(Resource.Id.imageView);
+
             TextView textview1 = FindViewById<TextView>(Resource.Id.textView1);
+
             TextView textview2 = FindViewById<TextView>(Resource.Id.textView2);
+
             TextView textview3 = FindViewById<TextView>(Resource.Id.textView3);
-            RatingBar ratingBar = FindViewById<RatingBar>(Resource.Id.ratingBar1);
+
+            ratingBar = FindViewById<RatingBar>(Resource.Id.ratingBar1);
+
             Android.Support.Design.Widget.TabLayout tabLayout = FindViewById<Android.Support.Design.Widget.TabLayout>(Resource.Id.tabLayout);
+
             saveButton = FindViewById<ImageButton>(Resource.Id.imageButton1);
+
             ViewPager viewPager = FindViewById<ViewPager>(Resource.Id.viewPager);
+
 
             var restaurantInfo = JsonConvert.DeserializeObject<Post>(Intent.GetStringExtra("RestaurantInfo"));
 
             var imageBitmap = ImageHelper.GetImageBitmapFromUrl(restaurantInfo.MainPhoto1);
             imageView.SetImageBitmap(imageBitmap);
 
-            saveButton.Click += saveButtonClick;
 
             textview1.Text = restaurantInfo.RestaurantName;
+
             if (restaurantInfo.Cost == "1")
             {
                 textview2.Text = "£";
@@ -84,16 +96,92 @@ namespace FoodFinder
 
             ID = restaurantInfo.ID;
 
+            saveButton.Click += saveButtonClick;
+
+            ratingBar.RatingBarChange += ratingClick;
+            //ratingBar.Click += ratingClick;
+
             SetSupportActionBar(toolbarNav);
             SetupViewPager(viewPager);
             
             tabLayout.SetupWithViewPager(viewPager);
-            //viewPager.Adapter = new MyFragmentAdapter(SupportFragmentManager, 4);
 
             viewPager.AddOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+
             checkIfUserHasSavedRestaurant(ID);
 
         }
+
+
+        void ratingClick(object sender, EventArgs e)
+        {
+            ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+            string userID = prefs.GetString("userID", null);
+            if (userID == null)
+            {
+                Toast.MakeText(this, "You need to be signed in! ", ToastLength.Short).Show();
+                Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
+                alert.SetTitle("Log In");
+                alert.SetMessage("You need to log in to submit a rating");
+                alert.SetPositiveButton("Log In", (senderAlert, args) => {
+                    Intent intent = new Intent(this, typeof(LogInActivity));
+                    //intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(restaurantInfo);
+                    intent.PutExtra("RestaurantInfo", Intent.GetStringExtra("RestaurantInfo"));
+                    StartActivity(intent);
+                    Finish();
+                });
+                alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+                    ratingBar.Rating = 0;
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
+            }
+            else
+            {
+                Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
+                alert.SetTitle("Submit Rating");
+                alert.SetMessage("Would you like to submit your rating?");
+                alert.SetPositiveButton("Submit", (senderAlert, args) => {
+                    string rating = ratingBar.Rating.ToString();
+                    submitRating(userID, ID, rating);
+                });
+                alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+                    ratingBar.Rating = 0;
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
+            }
+        }
+
+        async void submitRating (string userID, string ID, string rating)
+        {
+            Ratings newRating = new Ratings(rating, ID, null, userID, null);
+
+            string uri = "http://192.168.1.70:45455/api/Ratings/SubmitRating";
+
+            Uri result = new Uri(uri);
+            Console.WriteLine(result);
+            var httpClient = new HttpClient();
+
+            var content = new StringContent(JsonConvert.SerializeObject(newRating));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpResponseMessage refineResult = (await httpClient.PostAsync(result, content));
+
+            //await HandleResponse(refineResult);
+            string serialized = await refineResult.Content.ReadAsStringAsync();
+            Console.WriteLine(serialized);
+            if (refineResult.IsSuccessStatusCode)
+            {
+                Toast.MakeText(this, "Submitted", ToastLength.Short).Show();
+            }
+            else
+            {
+                Toast.MakeText(this, "Something went wrong", ToastLength.Short).Show();
+            }
+            
+        }
+
         async void checkIfUserHasSavedRestaurant(string ID)
         {
             ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
@@ -136,6 +224,8 @@ namespace FoodFinder
             }
            
         }
+
+
         void SetupViewPager(ViewPager viewPage)
         {
             var adapter = new Adapter(SupportFragmentManager);
@@ -146,10 +236,14 @@ namespace FoodFinder
             viewPage.Adapter = adapter;
             //viewPager.Adapter.NotifyDataSetChanged();
         }
+
+
         public static string sendData()
         {
             return ID;
         }
+
+
         void saveButtonClick(object sender, EventArgs e)
         {
             Toast.MakeText(this, "Click", ToastLength.Short).Show();
@@ -172,18 +266,34 @@ namespace FoodFinder
             }
             else
             {
-                saveButton.Selected = true;
-                Toast.MakeText(this, "false to true", ToastLength.Short).Show();
                 if (userID == null)
                 {
-                    Toast.MakeText(this, "User Not Logged In", ToastLength.Short).Show();
+                    Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
+                    alert.SetTitle("Log In");
+                    alert.SetMessage("You need to log in to add restaurants to favourites");
+                    alert.SetPositiveButton("Log In", (senderAlert, args) => {
+                        Intent intent = new Intent(this, typeof(LogInActivity));
+                        //intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(restaurantInfo);
+                        intent.PutExtra("RestaurantInfo", Intent.GetStringExtra("RestaurantInfo"));
+                        StartActivity(intent);
+                        Finish();
+                    });
+                    alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+                        
+                    });
+                    Dialog dialog = alert.Create();
+                    dialog.Show();
                 }
                 else
                 {
+                    saveButton.Selected = true;
+                    Toast.MakeText(this, "false to true", ToastLength.Short).Show();
                     saveRestaurant(userID);
                 }
             }
         }
+
+
         async void deleteSavedRestaurant(string userID)
         {
             string uri = "http://192.168.1.70:45455/api/favouriteRestaurants/";
@@ -203,6 +313,7 @@ namespace FoodFinder
                 }
             }
         }
+
 
         async void saveRestaurant(string userID)
         {
@@ -231,6 +342,7 @@ namespace FoodFinder
             }
         }
     }
+
 
     public class Adapter : FragmentPagerAdapter
     {

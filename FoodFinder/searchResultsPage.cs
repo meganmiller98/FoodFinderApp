@@ -130,7 +130,16 @@ namespace FoodFinder
                     test.Text = "Restaurants nearby with the category '" + searchedString + " "+sort +"'";
                     myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
                     listview.Adapter = adapter;
+                    listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+                    {
+                        string restName = RestaurantList[e.Position].RestaurantName;
+                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                        Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
+                        intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
+                        StartActivity(intent);
+                    };
                 }
+
 
                 //test.Text = result.AbsoluteUri;
             }
@@ -164,6 +173,14 @@ namespace FoodFinder
                     test.Text = "Restaurants nearby with '" + searchedString + "' cuisine";
                     myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
                     listview.Adapter = adapter;
+                    listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+                    {
+                        string restName = RestaurantList[e.Position].RestaurantName;
+                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                        Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
+                        intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
+                        StartActivity(intent);
+                    };
                 }
 
                 //test.Text = result.AbsoluteUri;
@@ -197,6 +214,14 @@ namespace FoodFinder
                     test.Text = "Restaurants nearby with dish '" + searchedString + "'";
                     myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
                     listview.Adapter = adapter;
+                    listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+                    {
+                        string restName = RestaurantList[e.Position].RestaurantName;
+                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                        Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
+                        intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
+                        StartActivity(intent);
+                    };
                 }
 
                 //test.Text = result.AbsoluteUri;
@@ -230,6 +255,14 @@ namespace FoodFinder
                     test.Text = "Restaurants nearby with the category '" + searchedString +"'";
                     myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
                     listview.Adapter = adapter;
+                    listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+                    {
+                        string restName = RestaurantList[e.Position].RestaurantName;
+                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                        Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
+                        intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
+                        StartActivity(intent);
+                    };
                 }
 
                 //test.Text = result.AbsoluteUri;
@@ -263,6 +296,14 @@ namespace FoodFinder
                     test.Text = "Restaurants nearby with the cuisine '" + searchedString + "'";
                     myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
                     listview.Adapter = adapter;
+                    listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+                    {
+                        string restName = RestaurantList[e.Position].RestaurantName;
+                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                        Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
+                        intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
+                        StartActivity(intent);
+                    };
                 }
 
                 //test.Text = result.AbsoluteUri;
@@ -296,6 +337,14 @@ namespace FoodFinder
                     test.Text = "Restaurants nearby with the dish refine '" + searchedString + "'";
                     myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
                     listview.Adapter = adapter;
+                    listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+                    {
+                        string restName = RestaurantList[e.Position].RestaurantName;
+                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                        Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
+                        intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
+                        StartActivity(intent);
+                    };
                 }
 
                 //test.Text = result.AbsoluteUri;

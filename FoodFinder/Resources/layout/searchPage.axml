@@ -16,23 +16,6 @@
 			android:minHeight="25px"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="@color/colorPrimary"
-			android:elevation="4dp"
-			android:id="@+id/toolbar1">
-			<Button
-				android:text="Location"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textAllCaps="false"
-				android:textSize="14dp"
-				android:padding="2dp"
-				android:id="@+id/locationButton" />
-		</android.support.v7.widget.Toolbar>
-		<android.support.v7.widget.Toolbar
-			android:minWidth="25px"
-			android:minHeight="25px"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
 			android:background="@color/colorAccent"
 			android:elevation="4dp"
 			android:layout_below="@id/toolbar1"
@@ -48,6 +31,8 @@
 					android:layout_width="wrap_content"
 					android:imeOptions="actionGo"
 					android:inputType="text"
+					android:backgroundTint="@color/colorPrimary"
+					android:textCursorDrawable="@drawable/cursor"
 					android:layout_height="wrap_content"
 					android:hint="Search by cuisine, category or dishes"
 					android:layout_centerHorizontal="true"

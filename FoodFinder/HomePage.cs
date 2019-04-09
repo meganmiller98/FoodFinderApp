@@ -28,7 +28,7 @@ namespace FoodFinder
         string sort;
         string dietary;
         string openNow;
-        private List<Post> RestaurantList;
+        //private List<Post> RestaurantList;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -93,18 +93,25 @@ namespace FoodFinder
                 var httpClient = new HttpClient();
                 var refineResult = (await httpClient.GetStringAsync(result));
                 List<Post> RestaurantList = JsonConvert.DeserializeObject<List<Post>>(refineResult);
-                myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
-                listview.Adapter = adapter;
-                //test.Text = result.AbsoluteUri;
-
-                listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+                if (RestaurantList.Count == 0)
                 {
-                    string restName = RestaurantList[e.Position].RestaurantName;
-                    Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
-                    Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
-                    intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
-                    StartActivity(intent);
-                };
+                    test.Text = "Sorry, no restaurants nearby";
+                }
+                else
+                {
+                    myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
+                    listview.Adapter = adapter;
+                    //test.Text = result.AbsoluteUri;
+
+                    listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+                    {
+                        string restName = RestaurantList[e.Position].RestaurantName;
+                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                        Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
+                        intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
+                        StartActivity(intent);
+                    };
+                }
 
             }
         }
@@ -129,11 +136,25 @@ namespace FoodFinder
                 var httpClient = new HttpClient();
                 var refineResult = (await httpClient.GetStringAsync(result));
                 List<Post> RestaurantList = JsonConvert.DeserializeObject<List<Post>>(refineResult);
-                myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
-                listview.Adapter = adapter;
+                if (RestaurantList.Count == 0)
+                {
+                    test.Text = "Sorry, no results";
+                }
+                else
+                {
+                    myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
+                    listview.Adapter = adapter;
 
-                //test.Text = result.AbsoluteUri;
-                
+                    listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+                    {
+                        string restName = RestaurantList[e.Position].RestaurantName;
+                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                        Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
+                        intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
+                        StartActivity(intent);
+                    };
+                }
+
             }
 
         }
