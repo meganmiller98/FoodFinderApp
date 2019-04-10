@@ -63,7 +63,7 @@ namespace FoodFinder
             times.Text = mItems[position].Opentimes + " - " + mItems[position].CloseTimes;
 
             TextView rating = restaurant.FindViewById<TextView>(Resource.Id.Rating);
-            rating.Text = mItems[position].Rating;
+            rating.Text = mItems[position].Rating + "/5";
 
             return restaurant;
         }

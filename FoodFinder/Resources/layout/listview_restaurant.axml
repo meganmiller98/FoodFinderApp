@@ -36,7 +36,7 @@
 			android:layout_height="match_parent"
 			android:id="@+id/Category"
 			android:layout_marginRight="50dp"
-			android:layout_marginLeft="5dp" />
+			android:layout_marginLeft="15dp" />
 		<TextView
 			android:text="Text"
 			android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:id="@+id/Rating"
-			android:layout_marginLeft="50dp"
+			android:layout_marginLeft="70dp"
 			android:layout_marginRight="5dp" />
 	</LinearLayout>
 

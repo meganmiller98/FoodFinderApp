@@ -85,7 +85,7 @@ namespace FoodFinder
             //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
             string uri = "http://192.168.1.70:45455/api/mainmenu/";
             string otherhalf = "HomeResults?lat="+lat+"&lon="+lon;
-            test.Text = otherhalf;
+            //test.Text = otherhalf;
             Uri result = null;
 
             if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
