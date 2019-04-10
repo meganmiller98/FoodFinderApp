@@ -60,13 +60,13 @@ namespace FoodFinder
             test = view.FindViewById<TextView>(Resource.Id.test);
             getLocation();
             getLastKnownLocation();
-            test.Text = lat + lon;
+            //test.Text = lat + lon;
             if (Arguments != null)
             {
                 sort = Arguments.GetString("sort");
                 dietary = Arguments.GetString("dietary");
                 openNow = Arguments.GetString("openNow");
-                test.Text = sort + " " + dietary + " " + openNow;
+                //test.Text = sort + " " + dietary + " " + openNow;
                 refineList(listview, sort, dietary, openNow);
             }
             else

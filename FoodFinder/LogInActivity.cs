@@ -32,9 +32,14 @@ namespace FoodFinder
             mUsername = FindViewById<EditText>(Resource.Id.userNameInput);
             mPassword = FindViewById<EditText>(Resource.Id.passwordInput);
             mButton = FindViewById<Button>(Resource.Id.button1);
+            Button signup = FindViewById<Button>(Resource.Id.signUpButton);
 
             Android.Widget.Toolbar toolbar = FindViewById<Android.Widget.Toolbar>(Resource.Id.toolbar1);
+            SetActionBar(toolbar);
+            ActionBar.Title = "Log In";
+
             mButton.Click += login_Click;
+            signup.Click += signup_Click;
 
             mUsername.KeyPress += (object sender, View.KeyEventArgs e) => {
                 e.Handled = false;
@@ -67,7 +72,12 @@ namespace FoodFinder
                 }
             };
         }
-
+        void signup_Click(object sender, EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(SignUpActivity));
+            StartActivity(intent);
+            Finish();
+        }
         void login_Click(object sender, EventArgs e)
         {
             if (mUsername != null && mPassword != null)
@@ -120,7 +130,7 @@ namespace FoodFinder
 
         public void help()
         {
-            ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+           /* ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
             string userID = prefs.GetString("userID", null);
             string userName = prefs.GetString("username", null);
             string password = prefs.GetString("password", null);
@@ -132,7 +142,7 @@ namespace FoodFinder
             else
             {
                 Toast.MakeText(this, userID + " " + userName + " " + password, ToastLength.Short).Show();
-            }
+            }*/
 
             if (Intent.GetStringExtra("RestaurantInfo") != null)
             {

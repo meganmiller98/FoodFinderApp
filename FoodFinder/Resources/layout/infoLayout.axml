@@ -12,13 +12,18 @@
 		android:minHeight="25px"
 		android:id="@+id/DescriptionHeader"
 		android:textSize="16dp"
-		android:textStyle="bold"/>
+		android:textStyle="bold"
+		android:padding="5dp" />
 	<TextView
 		android:text="Decription Default"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/DescriptionHeader"
-		android:id="@+id/description" />
+		android:id="@+id/description"
+		android:paddingLeft="5dp"
+		android:paddingTop="2dp"
+		android:paddingBottom="2dp"
+		android:paddingRight="5dp" />
 	<TextView
 		android:text="Opening Times"
 		android:layout_width="wrap_content"
@@ -26,7 +31,8 @@
 		android:layout_below="@id/description"
 		android:id="@+id/OpenTimesHeader"
 		android:textStyle="bold"
-		android:textSize="16dp" />
+		android:textSize="16dp"
+		android:padding="5dp" />
 	<RelativeLayout
 		android:minWidth="25px"
 		android:minHeight="25px"
@@ -34,7 +40,8 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/OpenTimesHeader"
 		android:id="@+id/relativeLayout1"
-		android:background="#ffe0e0e0">
+		android:background="#ffe0e0e0"
+		android:padding="5dp">
 		<TextView
 			android:text="Monday"
 			android:layout_width="wrap_content"
@@ -62,7 +69,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/relativeLayout1"
-		android:id="@+id/relativeLayout2" >
+		android:id="@+id/relativeLayout2"
+		android:padding="5dp">
 		<TextView
 			android:text="Tuesday"
 			android:layout_width="wrap_content"
@@ -91,7 +99,8 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/relativeLayout2"
 		android:id="@+id/relativeLayout3"
-		android:background="#ffe0e0e0">
+		android:background="#ffe0e0e0"
+		android:padding="5dp">
 		<TextView
 			android:text="Wednesday"
 			android:layout_width="wrap_content"
@@ -119,7 +128,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/relativeLayout3"
-		android:id="@+id/relativeLayout4" >
+		android:id="@+id/relativeLayout4"
+		android:padding="5dp">
 		<TextView
 			android:text="Thursday"
 			android:layout_width="wrap_content"
@@ -148,7 +158,8 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/relativeLayout4"
 		android:id="@+id/relativeLayout5"
-		android:background="#ffe0e0e0">
+		android:background="#ffe0e0e0"
+		android:padding="5dp">
 		<TextView
 			android:text="Friday"
 			android:layout_width="wrap_content"
@@ -176,7 +187,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/relativeLayout5"
-		android:id="@+id/relativeLayout6" >
+		android:id="@+id/relativeLayout6"
+		android:padding="5dp">
 		<TextView
 			android:text="Saturday"
 			android:layout_width="wrap_content"
@@ -205,7 +217,8 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/relativeLayout6"
 		android:id="@+id/relativeLayout7"
-		android:background="#ffe0e0e0">
+		android:background="#ffe0e0e0"
+		android:padding="5dp">
 		<TextView
 			android:text="Sunday"
 			android:layout_width="wrap_content"
@@ -234,7 +247,8 @@
 		android:layout_below="@+id/relativeLayout7"
 		android:id="@+id/ContactInfoHeader"
 		android:textSize="16dp"
-		android:textStyle="bold" />
+		android:textStyle="bold"
+		android:padding="5dp" />
 	<LinearLayout
 		android:orientation="horizontal"
 		android:minWidth="25px"
@@ -243,11 +257,14 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/ContactInfoHeader"
 		android:id="@+id/linearLayout1"
-		android:outlineProvider="none">
+		android:outlineProvider="none"
+		android:paddingLeft="5dp">
 		<ImageView
-			android:src="@android:drawable/ic_menu_gallery"
+			android:background="@drawable/smallphone"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:paddingLeft="5dp"
+			android:paddingRight="2dp"
 			android:id="@+id/imageView1" />
 		<TextView
 			android:text="Text"
@@ -264,13 +281,18 @@
 		android:layout_below="@id/linearLayout1"
 		android:id="@+id/LocationHeader"
 		android:textSize="16dp"
-		android:textStyle="bold" />
+		android:textStyle="bold"
+		android:padding="5dp" />
 	<TextView
 		android:text="Address"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/LocationHeader"
-		android:id="@+id/Address" />
+		android:id="@+id/Address"
+		android:paddingLeft="5dp"
+		android:paddingTop="2dp"
+		android:paddingBottom="2dp"
+		android:paddingRight="5dp" />
 	
 
 </RelativeLayout>

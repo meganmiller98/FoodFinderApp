@@ -17,14 +17,8 @@
 			android:background="?android:attr/colorAccent"
 			android:minWidth="25px"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			android:layout_height="?android:attr/actionBarSize"
 			android:id="@+id/toolbar1">
-
-					<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Log In"
-					android:id="@+id/toolbar_title" />
 		</Toolbar>
 		<TextView
 			android:text="Username"
@@ -55,6 +49,11 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:id="@+id/button1"/>
+		<Button
+			android:text="Sign Up"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/signUpButton" />
 
 	</LinearLayout>
 	

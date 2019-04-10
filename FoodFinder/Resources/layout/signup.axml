@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+	<Toolbar
+		android:minHeight="25px"
+		android:background="?android:attr/colorAccent"
+		android:minWidth="25px"
+		android:layout_width="match_parent"
+		android:layout_height="?android:attr/actionBarSize"
+		android:id="@+id/toolbar1" />
+	<TextView
+			android:text="Name"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/textName"
+			android:padding="5dp" />
+	<EditText
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/Name"
+		android:hint="Jane Doe"
+		android:inputType="text"/>
+	<TextView
+			android:text="Username"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/textUserName"
+			android:padding="5dp" />
+	<EditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/userNameInput"
+			android:hint="myemail@hotmail.com"
+			android:inputType="none|textEmailAddress"/>
+	<TextView
+			android:text="Password"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/password"
+			android:padding="5dp" />
+
+	<EditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/passwordInput"
+			android:inputType="none|textPassword"
+			android:hint="**************" />
+	<TextView
+			android:text="Re-Enter Password"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/password2"
+			android:padding="5dp" />
+
+	<EditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/passwordInput2"
+			android:inputType="none|textPassword"
+			android:hint="**************" />
+	<Button
+		android:text="Confirm"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/confirm" />
+</LinearLayout>

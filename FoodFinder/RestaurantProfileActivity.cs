@@ -189,7 +189,8 @@ namespace FoodFinder
 
             if (userID == null)
             {
-                Toast.MakeText(this, "User Not Logged In", ToastLength.Short).Show();
+                //Toast.MakeText(this, "User Not Logged In", ToastLength.Short).Show();
+                Console.WriteLine("user not logged in");
             }
             else
             {
@@ -252,7 +253,7 @@ namespace FoodFinder
             if (saveButton.Selected == true)
             {
                 saveButton.Selected = false;
-                Toast.MakeText(this, "true to false", ToastLength.Short).Show();
+                //Toast.MakeText(this, "true to false", ToastLength.Short).Show();
                 
 
                 if (userID == null)
@@ -287,7 +288,7 @@ namespace FoodFinder
                 else
                 {
                     saveButton.Selected = true;
-                    Toast.MakeText(this, "false to true", ToastLength.Short).Show();
+                    //Toast.MakeText(this, "false to true", ToastLength.Short).Show();
                     saveRestaurant(userID);
                 }
             }

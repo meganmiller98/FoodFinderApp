@@ -86,6 +86,7 @@
     <Compile Include="SearchFragmentActual.cs" />
     <Compile Include="searchRefineDialog.cs" />
     <Compile Include="searchResultsPage.cs" />
+    <Compile Include="SignUpActivity.cs" />
     <Compile Include="User.cs" />
     <Compile Include="VoucherPage.cs" />
   </ItemGroup>
@@ -285,6 +286,17 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\cursor.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\signup.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\smallphone.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
