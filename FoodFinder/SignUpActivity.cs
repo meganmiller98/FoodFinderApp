@@ -71,7 +71,12 @@ namespace FoodFinder
         {
             User user = new User(null, name, email, password, null);
 
-            string uri = "http://192.168.1.70:45455/api/Users/addUser";
+            //myIp
+            //string uri = "htp://192.168.0.20:45455/api/Users/addUser";
+            //uni
+            string uri = "http://10.201.37.145:45455/api/Users/addUser";
+            //string uri = "htp://192.168.1.70:45455/api/Users/addUser";
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Users/addUser";
 
             Uri result = new Uri(uri);
             Console.WriteLine(result);
@@ -87,22 +92,23 @@ namespace FoodFinder
             if (refineResult.IsSuccessStatusCode)
             {
                 Toast.MakeText(this, "Success", ToastLength.Short).Show();
-                validateUsers(email, password);
+                validateUsers(email, password, name);
             }
             else
             {
                 Toast.MakeText(this, "Something went wrong", ToastLength.Short).Show();
             }
         }
-        async void validateUsers(string email, string password)
+        async void validateUsers(string email, string password, string name)
         {
             //myIp
-            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
+            //string uri = "htp://192.168.0.20:45455/api/Users/";
 
             //uni IP
-            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+            string uri = "http://10.201.37.145:45455/api/Users/";
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Users/";
 
-            string uri = "http://192.168.1.70:45455/api/Users/";
+            //string uri = "htp://192.168.1.70:45455/api/Users/";
             string otherhalf = "validateUser?email=" + email + "&password=" + password;
 
             Uri result = null;
@@ -119,12 +125,17 @@ namespace FoodFinder
                     // code help from stacktips.com/tutorials/xamarin/shared-preferences-example-in-xamarin-android
                     ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
                     ISharedPreferencesEditor editor = prefs.Edit();
+                    editor.PutString("name", name);
                     editor.PutString("userID", mID);
                     editor.PutString("username", email);
                     editor.PutString("password", password);
                     editor.Apply();
 
                     Toast.MakeText(this, email, ToastLength.Short).Show();
+                    Finish();
+                    Intent intent = new Intent(this, typeof(MainActivity));
+                    intent.PutExtra("frgToLoad", "profilePage");
+                    StartActivity(intent);
                     Finish();
 
                 }

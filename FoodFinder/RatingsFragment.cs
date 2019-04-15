@@ -56,9 +56,10 @@ namespace FoodFinder
             //string uri = "htp://192.168.0.20:45455/api/Ratings/";
 
             //uni IP
-            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+            string uri = "http://10.201.37.145:45455/api/Ratings/";
 
-            string uri = "http://192.168.1.70:45455/api/Ratings/";
+            //string uri = "htp://192.168.1.70:45455/api/Ratings/";
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Ratings/";
 
             string otherhalf = "getRatings?ID= " + getID;
 

@@ -6,6 +6,7 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using Xamarin.Essentials;
@@ -21,18 +22,31 @@ namespace FoodFinder
         HomePage homePage = new HomePage();
         VoucherPage voucherPage = new VoucherPage();
         ProfilePage profilePage = new ProfilePage();
-        SearchFragment searchFragment = new SearchFragment();
+        //SearchFragment searchFragment = new SearchFragment();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
-
-            setFragment(homePage);
-            textMessage = FindViewById<TextView>(Resource.Id.message);
             BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
+            if (Intent.GetStringExtra("frgToLoad") != null)
+            {
+                
+                //OnNavigationItemSelected(Profile);
+                navigation.Menu.GetItem(2).SetChecked(true);
+                setFragment(profilePage);
+            }
+            else
+            {
+                setFragment(homePage);
+            }
+
+            textMessage = FindViewById<TextView>(Resource.Id.message);
+            
             navigation.SetOnNavigationItemSelectedListener(this);
+
+           
 
         }
         public bool OnNavigationItemSelected(IMenuItem item)
@@ -41,12 +55,16 @@ namespace FoodFinder
             {
                 case Resource.Id.navigation_home:
                     setFragment(homePage);
+                    Console.WriteLine("This is the item " + item);
+
                     return true;
                 case Resource.Id.navigation_dashboard:
                     setFragment(voucherPage);
+                    Console.WriteLine("This is the item " + item);
                     return true;
                 case Resource.Id.navigation_notifications:
                     setFragment(profilePage);
+                    Console.WriteLine("This is the item " + item);
                     return true;
             }
             return false;

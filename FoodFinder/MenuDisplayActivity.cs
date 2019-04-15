@@ -47,13 +47,14 @@ namespace FoodFinder
         {
             mMenuItems = new List<MenuItems>();
             //myIp
-            //string uri = "htp://192.168.0.20:45455/api/Ratings/";
+            //string uri = "htp://192.168.0.20:45455/api/MenuItems/";
 
             //uni IP
-            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+            string uri = "http://10.201.37.145:45455/api/MenuItems/";
 
-            string uri = "http://192.168.1.70:45455/api/MenuItems/";
+            //string uri = "htp://192.168.1.70:45455/api/MenuItems/";
 
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/MenuItems/";
             string otherhalf = "getMenuItems?ID=" + ID + "&menutype=" + menuType;
 
             Uri result = null;

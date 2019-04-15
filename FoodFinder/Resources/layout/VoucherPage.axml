@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
 	tools:context=".VoucherPage">
-	<TextView
-		android:text="Voucher Page"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+	<RelativeLayout
 		android:minWidth="25px"
 		android:minHeight="25px"
-		android:gravity="center"
-		android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-		android:id="@+id/textView1" />
-	<Button
-		android:text="Log Out"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/button1" />
+		android:id="@+id/relativeLayout1" >
+		<Toolbar
+		android:minHeight="25px"
+		android:background="?android:attr/colorAccent"
+		android:minWidth="25px"
+		android:layout_width="match_parent"
+		android:layout_height="?android:attr/actionBarSize"
+		android:id="@+id/toolbar1" >
+			<TextView
+				android:text="Vouchers"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/textView1" />
+		</Toolbar>
+		<TextView
+				android:text="Vouchers"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/toolbar1"
+				android:id="@+id/textView2" />
+		<ListView
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/listView1"
+			android:layout_below="@id/textView2" />
+	</RelativeLayout>
+	
 
 
 </FrameLayout>

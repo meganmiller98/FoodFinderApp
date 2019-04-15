@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:descendantFocusability="blocksDescendants">
+	<ImageView
+		android:src="@android:drawable/ic_menu_gallery"
+		android:layout_width="match_parent"
+		android:layout_height="200dp"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:id="@+id/VoucherImage"
+		android:layout_marginLeft="2dp"
+		android:layout_marginRight="2dp"
+		android:layout_marginTop="0dp"
+		android:layout_marginBottom="0dp" />
+	<TextView
+		android:text="Text"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/RestaurantName"
+		android:layout_gravity="center_horizontal"
+		android:gravity="center_horizontal"
+		android:layout_marginBottom="2dp" />
+	<RelativeLayout
+		android:orientation="vertical"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/linearLayout1">
+		<TextView
+			android:text="Text"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/Deal"
+			android:layout_marginLeft="15dp" />
+		<TextView
+			android:text="Text"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/Deal"
+			android:layout_marginLeft="15dp"
+			android:id="@+id/ExpiryDate" />
+	</RelativeLayout>
+	
+	
+	
+
+</LinearLayout>

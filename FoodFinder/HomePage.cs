@@ -80,10 +80,13 @@ namespace FoodFinder
 
         async void ExampleMethodAsync(ListView listview)
         {
-
+            //my
             //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
-            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
-            string uri = "http://192.168.1.70:45455/api/mainmenu/";
+            //uni
+            string uri = "http://10.201.37.145:45455/api/mainmenu/";
+            //Katy
+            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
             string otherhalf = "HomeResults?lat="+lat+"&lon="+lon;
             //test.Text = otherhalf;
             Uri result = null;
@@ -123,9 +126,10 @@ namespace FoodFinder
             //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
 
             //uni IP
-            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+           string uri = "http://10.201.37.145:45455/api/mainmenu/";
 
-            string uri = "http://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
 
             string otherhalf = "refinements2?lat=" + lat + "&lon="+ lon + "&sort=" + value + "&dietary=" + value2 + "&openNow=" + value3;
 

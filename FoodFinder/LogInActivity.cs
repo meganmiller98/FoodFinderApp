@@ -89,12 +89,13 @@ namespace FoodFinder
         async void validateUsers()
         {
             //myIp
-            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
+            //string uri = "htp://192.168.0.20:45455/api/Users/";
 
             //uni IP
-            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+            string uri = "http://10.201.37.145:45455/api/Users/";
 
-            string uri = "http://192.168.1.70:45455/api/Users/";
+            //string uri = "htp://192.168.1.70:45455/api/Users/";
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Users/";
             string otherhalf = "validateUser?email=" + mUsername.Text + "&password=" + mPassword.Text;
 
             Uri result = null;
@@ -107,10 +108,12 @@ namespace FoodFinder
                 if (users.Count != 0)
                 {
                     string mID = users[0].UserID;
+                    string name = users[0].Name;
 
                     // code help from stacktips.com/tutorials/xamarin/shared-preferences-example-in-xamarin-android
                     ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
                     ISharedPreferencesEditor editor = prefs.Edit();
+                    editor.PutString("name", name);
                     editor.PutString("userID", mID);
                     editor.PutString("username", mUsername.Text);
                     editor.PutString("password", mPassword.Text);
@@ -152,10 +155,44 @@ namespace FoodFinder
                 StartActivity(intent);
                 Finish();
             }
-            else
+            else if(Intent.GetStringExtra("VoucherInfo") != null)
             {
+                Intent intent = new Intent(this, typeof(VoucherInfoActivity));
+                    //intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(restaurantInfo);
+                intent.PutExtra("VoucherInfo", Intent.GetStringExtra("VoucherInfo"));
+                StartActivity(intent);
                 Finish();
             }
+            else
+            {
+                Intent intent = new Intent(this, typeof(MainActivity));
+                intent.PutExtra("frgToLoad", "profilePage");
+                StartActivity(intent);
+                Finish();
+            }
+        }
+
+        public override bool OnKeyDown(Keycode keyCode, KeyEvent e)
+        {
+            if (keyCode == Keycode.Back)
+            {
+
+                if (Intent.GetStringExtra("isProfile") != null)
+                {
+                    Intent intent = new Intent(this, typeof(MainActivity));
+                    //intent.PutExtra("frgToLoad", "profilePage");
+                    StartActivity(intent);
+                    Finish();
+                    return false;
+                }
+                else
+                {
+                    Finish();
+                    return false;
+                }
+            }
+            return false;
+
         }
     }
 

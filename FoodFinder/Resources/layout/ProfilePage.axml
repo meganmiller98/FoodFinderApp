@@ -1,10 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
 	tools:context=".ProfilePage">
+	<LinearLayout
+		android:orientation="vertical"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/linearLayout1" >
+		<RelativeLayout
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/relativeLayout1" >
+			<Toolbar
+				android:minHeight="?android:attr/actionBarSize"
+				android:background="?android:attr/colorAccent"
+				android:minWidth="25px"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/toolbar1">
+				<Button
+					android:text="Log out"
+					android:layout_width="80dp"
+					android:layout_height="40dp"
+					android:id="@+id/logOutButton"
+					android:background="?android:attr/colorPrimaryDark"
+					android:layout_gravity="right"
+					android:textColor="#fffafafa"
+					android:textStyle="normal"
+					android:padding="2dp"
+					android:layout_marginRight="5dp" />
+			</Toolbar>
 
 
+		</RelativeLayout>
+		<RelativeLayout
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/relativeLayout1" >
+			<ImageView
+				android:layout_width="50dp"
+				android:layout_height="50dp"
+				android:background="@drawable/ic_profile"
+				android:id="@+id/imageView1"
+				android:layout_centerHorizontal="true"
+				android:padding="30dp" />
+			<TextView
+				android:text="Welcome"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/imageView1"
+				android:id="@+id/welcomeText"
+				android:layout_centerHorizontal="true"
+				android:textSize="18dp" />
+		</RelativeLayout>
+		<TextView
+			android:text="Favourite Restaurants"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView1" />
+		<LinearLayout
+			android:orientation="horizontal"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="180dp"
+			android:background="#f2f2f2"
+			android:id="@+id/linearLayout2">
+			<TextView
+				android:text="No saved Restaurants."
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:id="@+id/textSaveMessage" />
+			<android.support.v7.widget.RecyclerView
+				android:minWidth="25px"
+				android:minHeight="25px"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="horizontal"
+				android:id="@+id/recyclerViewRestaurants" />
+		</LinearLayout>
+		<TextView
+			android:text="Saved Vouchers"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView2" />
+		<LinearLayout
+			android:orientation="horizontal"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="180dp"
+			android:background="#f2f2f2"
+			android:id="@+id/linearLayout3">
+			<android.support.v7.widget.RecyclerView
+				android:minWidth="25px"
+				android:minHeight="25px"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="horizontal"
+				android:id="@+id/recyclerViewVouchers" />
+		</LinearLayout>
+			
+	</LinearLayout>
 </FrameLayout>

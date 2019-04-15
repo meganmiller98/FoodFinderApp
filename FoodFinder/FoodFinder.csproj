@@ -82,13 +82,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestaurantInfo.cs" />
     <Compile Include="RestaurantProfileActivity.cs" />
-    <Compile Include="SearchFragment.cs" />
+    <Compile Include="savedRestaurants.cs" />
+    <Compile Include="savedVouchers.cs" />
     <Compile Include="SearchFragmentActual.cs" />
     <Compile Include="searchRefineDialog.cs" />
     <Compile Include="searchResultsPage.cs" />
     <Compile Include="SignUpActivity.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="VoucherInfoActivity.cs" />
     <Compile Include="VoucherPage.cs" />
+    <Compile Include="VoucherPageListViewAdapter.cs" />
+    <Compile Include="Vouchers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -297,6 +301,34 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\smallphone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\profileSavedRestuarants.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_profile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\listview_vouchers.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\voucherProfilePage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\VoucherInfoPage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\profileSavedVouchers.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

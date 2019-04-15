@@ -109,9 +109,10 @@ namespace FoodFinder
             //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
 
             //uni IP
-            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+            string uri = "http://10.201.37.145:45455/api/mainmenu/";
 
-            string uri = "http://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
             string otherhalf = "GetRestaurantsAccordingToCategories?lon=" + lon + "&lat=" + lat + "&category=" + searchedString;
 
             Uri result = null;
@@ -152,9 +153,10 @@ namespace FoodFinder
             //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
 
             //uni IP
-            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+            string uri = "http://10.201.37.145:45455/api/mainmenu/";
 
-            string uri = "http://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
             string otherhalf = "GetRestaurantsAccordingToCuisines?lon=" + lon + "&lat=" + lat + "&cuisine=" + searchedString;
 
             Uri result = null;
@@ -193,9 +195,10 @@ namespace FoodFinder
             //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
 
             //uni IP
-            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+            string uri = "http://10.201.37.145:45455/api/mainmenu/";
 
-            string uri = "http://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
             string otherhalf = "GetRestaurantsAccordingToDish?lon=" + lon + "&lat=" + lat + "&dish=" + searchedString;
 
             Uri result = null;
@@ -234,9 +237,10 @@ namespace FoodFinder
             //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
 
             //uni IP
-            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+            string uri = "http://10.201.37.145:45455/api/mainmenu/";
 
-            string uri = "http://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
             string otherhalf = "CategoryRefinements?lat=" + lat + "&lon=" + lon + "&category=" + searchedString + "&sort=" +sort+ "&dietary=" +dietary+ "&openNow=" +openNow;
 
             Uri result = null;
@@ -275,9 +279,10 @@ namespace FoodFinder
             //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
 
             //uni IP
-            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+            string uri = "http://10.201.37.145:45455/api/mainmenu/";
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
 
-            string uri = "http://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
             string otherhalf = "CuisineRefinements?lat=" + lat + "&lon=" + lon + "&cuisine=" + searchedString + "&sort=" + sort + "&dietary=" + dietary + "&openNow=" + openNow;
 
             Uri result = null;
@@ -316,9 +321,10 @@ namespace FoodFinder
             //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
 
             //uni IP
-            //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+            string uri = "http://10.201.37.145:45455/api/mainmenu/";
 
-            string uri = "http://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
             string otherhalf = "DishRefinements?lat=" + lat + "&lon=" + lon + "&dish=" + searchedString + "&sort=" + sort + "&dietary=" + dietary + "&openNow=" + openNow;
 
             Uri result = null;

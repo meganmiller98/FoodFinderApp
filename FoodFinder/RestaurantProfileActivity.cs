@@ -113,6 +113,28 @@ namespace FoodFinder
 
         }
 
+       public override bool OnKeyDown(Keycode keyCode, KeyEvent e)
+        {
+            if (keyCode == Keycode.Back)
+            {
+
+                if (Intent.GetStringExtra("profile") != null)
+                {
+                    Intent intent = new Intent(this, typeof(MainActivity));
+                    intent.PutExtra("frgToLoad", "profilePage");
+                    StartActivity(intent);
+                    Finish();
+                    return false;
+                }
+                else
+                {
+                    Finish();
+                    return false;
+                }
+            }
+            return false;
+
+        }
 
         void ratingClick(object sender, EventArgs e)
         {
@@ -158,7 +180,13 @@ namespace FoodFinder
         {
             Ratings newRating = new Ratings(rating, ID, null, userID, null);
 
-            string uri = "http://192.168.1.70:45455/api/Ratings/SubmitRating";
+            //katy
+            //string uri = "htp://192.168.1.70:45455/api/Ratings/SubmitRating";
+            //uni
+            string uri = "http://10.201.37.145:45455/api/Ratings/SubmitRating";
+            //my
+            //string uri = "htp://192.168.0.20:45455/api/Ratings/SubmitRating";
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Ratings/SubmitRating/";
 
             Uri result = new Uri(uri);
             Console.WriteLine(result);
@@ -174,6 +202,11 @@ namespace FoodFinder
             if (refineResult.IsSuccessStatusCode)
             {
                 Toast.MakeText(this, "Submitted", ToastLength.Short).Show();
+                //Intent intent = new Intent(this, typeof(RestaurantProfileActivity));
+                //intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(restaurantInfo);
+                //intent.PutExtra("RestaurantInfo", Intent.GetStringExtra("RestaurantInfo"));
+                //StartActivity(intent);
+                Finish();
             }
             else
             {
@@ -196,12 +229,14 @@ namespace FoodFinder
             {
                 mFavedRestaurants = new List<favedRestaurants>();
                 //myIp
-                //string uri = "htp://192.168.0.20:45455/api/Ratings/";
+                //string uri = "htp://192.168.0.20:45455/api/favouriteRestaurants/";
 
                 //uni IP
-                //string uri = "htp://10.201.37.145:45455/api/mainmenu/";
+                string uri = "http://10.201.37.145:45455/api/favouriteRestaurants/";
 
-                string uri = "http://192.168.1.70:45455/api/favouriteRestaurants/";
+                //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/favouriteRestaurants/";
+
+                //string uri = "htp://192.168.1.70:45455/api/favouriteRestaurants/";
 
                 string otherhalf = "checkIfSaved?userID=" + userID + "&restaurantID=" + ID;
                 //string otherhalf = "checkIfSaved?userID=1&restaurantID=1";
@@ -297,7 +332,14 @@ namespace FoodFinder
 
         async void deleteSavedRestaurant(string userID)
         {
-            string uri = "http://192.168.1.70:45455/api/favouriteRestaurants/";
+            //string uri = "htp://192.168.1.70:45455/api/favouriteRestaurants/";
+
+            //uni
+            string uri = "http://10.201.37.145:45455/api/favouriteRestaurants/";
+
+            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/favouriteRestaurants/";
+            //myIp
+            //string uri = "htp://192.168.0.20:45455/api/favouriteRestaurants/";
 
             string otherhalf = "deleteSaved?userID=" + userID + "&restaurantID=" + ID;
             //string otherhalf = "checkIfSaved?userID=1&restaurantID=1";
@@ -319,8 +361,15 @@ namespace FoodFinder
         async void saveRestaurant(string userID)
         {
             favedRestaurants fav = new favedRestaurants(userID, ID, null);
-            
-            string uri = "http://192.168.1.70:45455/api/favouriteRestaurants/Save";
+
+            //string uri = "htp://192.168.1.70:45455/api/favouriteRestaurants/Save";
+
+            //uni
+            //string uri = "htp://10.201.37.145:45455/api/favouriteRestaurants/Save";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/favouriteRestaurants/Save";
+
+            //myIp
+            //string uri = "htp://192.168.0.20:45455/api/favouriteRestaurants/Save";
 
             Uri result = new Uri(uri);
             Console.WriteLine(result);
