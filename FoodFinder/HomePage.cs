@@ -28,12 +28,10 @@ namespace FoodFinder
         string sort;
         string dietary;
         string openNow;
-        //private List<Post> RestaurantList;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            // Create your fragment here
             
         }
 
@@ -51,66 +49,65 @@ namespace FoodFinder
             ImageButton refineButton = view.FindViewById<ImageButton>(Resource.Id.refineSearchButton);
             ImageButton searchButton = view.FindViewById<ImageButton>(Resource.Id.searchButton);
 
-            //Android.Widget.SearchView searchView = view.FindViewById<Android.Widget.SearchView>(Resource.Id.searchView1);
-            //searchView.OnActionViewExpanded();
-
             searchButton.Click += search_Click;
 
             ListView listview = (ListView)view.FindViewById(Resource.Id.myListView);
             test = view.FindViewById<TextView>(Resource.Id.test);
+
+            //getting latitude and longitude of users device
             getLocation();
             getLastKnownLocation();
-            //test.Text = lat + lon;
+
+            //Getting the refinements from the refinement dialog and sending it to the refineList method.
+
             if (Arguments != null)
             {
                 sort = Arguments.GetString("sort");
                 dietary = Arguments.GetString("dietary");
                 openNow = Arguments.GetString("openNow");
-                //test.Text = sort + " " + dietary + " " + openNow;
                 refineList(listview, sort, dietary, openNow);
             }
             else
             {
-                ExampleMethodAsync(listview);
+                //default display of restaurants in order by distance
+                GetRestaurants(listview);
             }
             refineButton.Click += button_Click;
             return view;
             
         }
 
-        async void ExampleMethodAsync(ListView listview)
+        //Getting all restaurants near the users device and displaying it in order of distance
+        async void GetRestaurants(ListView listview)
         {
-            //my
-            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
-            //uni
-            string uri = "http://10.201.37.145:45455/api/mainmenu/";
-            //Katy
-            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
+
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
             string otherhalf = "HomeResults?lat="+lat+"&lon="+lon;
-            //test.Text = otherhalf;
+
             Uri result = null;
 
             if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
             {
                 var httpClient = new HttpClient();
                 var refineResult = (await httpClient.GetStringAsync(result));
+                
+                //Deserialize json object
                 List<Post> RestaurantList = JsonConvert.DeserializeObject<List<Post>>(refineResult);
                 if (RestaurantList.Count == 0)
                 {
+                    //display message to the user
                     test.Text = "Sorry, no restaurants nearby";
                 }
                 else
                 {
                     myRestaurantListViewAdapter adapter = new myRestaurantListViewAdapter(this.Context as Activity, RestaurantList);
                     listview.Adapter = adapter;
-                    //test.Text = result.AbsoluteUri;
 
+                    //when restaurant item is clicked show the restaurant's profile
                     listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
                     {
-                        string restName = RestaurantList[e.Position].RestaurantName;
-                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
                         Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
+                        //sending all the POST information for the chosen restaurant to it's restaurant profile page.
                         intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
                         StartActivity(intent);
                     };
@@ -119,17 +116,10 @@ namespace FoodFinder
             }
         }
 
-
+        //sending the refinements to the API and displaying the results
         async void refineList(ListView listview, string value, string value2, string value3)
         {
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
-
-            //uni IP
-           string uri = "http://10.201.37.145:45455/api/mainmenu/";
-
-            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
 
             string otherhalf = "refinements2?lat=" + lat + "&lon="+ lon + "&sort=" + value + "&dietary=" + value2 + "&openNow=" + value3;
 
@@ -151,8 +141,6 @@ namespace FoodFinder
 
                     listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
                     {
-                        string restName = RestaurantList[e.Position].RestaurantName;
-                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
                         Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
                         intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
                         StartActivity(intent);
@@ -162,6 +150,8 @@ namespace FoodFinder
             }
 
         }
+
+        //refine dialog button clicked
         void button_Click(object sender, EventArgs e)
         {
             //show fragment
@@ -175,6 +165,7 @@ namespace FoodFinder
             refineDialog.Show(transcation, "FragmentDialog");
         }
 
+        //start search page fragment if search icon is clicked.
        void search_Click(object sender, EventArgs e)
         {
             FragmentTransaction fragmentTransaction = this.Activity.FragmentManager.BeginTransaction();

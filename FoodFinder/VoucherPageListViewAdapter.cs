@@ -12,6 +12,7 @@ using Android.Widget;
 
 namespace FoodFinder
 {
+    //Sets up Listview adapter for vouchers
     class VoucherPageListViewAdapter : BaseAdapter<Vouchers>
     {
         private List<Vouchers> mItems;
@@ -46,8 +47,6 @@ namespace FoodFinder
                 voucher = LayoutInflater.From(mContext).Inflate(Resource.Layout.listview_vouchers, null, false);
             }
 
-            //Using ImageHelper class
-            //MainPhoto1 in post
             ImageView voucherImg = voucher.FindViewById<ImageView>(Resource.Id.VoucherImage);
             var imageBitmap = ImageHelper.GetImageBitmapFromUrl(mItems[position].voucherImage);
             voucherImg.SetImageBitmap(imageBitmap);
@@ -59,37 +58,25 @@ namespace FoodFinder
             deal.Text = mItems[position].deal;
 
             TextView expiryDate = voucher.FindViewById<TextView>(Resource.Id.ExpiryDate);
-            expiryDate.Text = mItems[position].expiryDate.ToString();
+            //expiryDate.Text = mItems[position].expiryDate.ToString();
+            string date = mItems[position].expiryDate.ToString();
+
+            if (date.Contains("00:00:00"))
+            {
+                string modifiedDate = date.Remove(date.IndexOf(" 00:00:00"), " 00:00:00".Length);
+                expiryDate.Text = "Expires: " + modifiedDate;
+            }
+            else
+            {
+                expiryDate.Text = date;
+            }
 
             ImageButton button = voucher.FindViewById<ImageButton>(Resource.Id.imageButton1);
-            //button.Click += buttonClick;
 
             image = voucher.FindViewById<ImageView>(Resource.Id.imageView1);
-            /*image.Click += imageClick;
-            voucher.image.Click += delegate {
-                btnOneClick();
-            };*/
+
             return voucher;
         }
         
-       /* void buttonClick(object sender, EventArgs e)
-        {
-            Toast.MakeText(mContext, "Clicked", ToastLength.Short).Show();
-        }
-        void imageClick (object sender, EventArgs e)
-        {
-            Toast.MakeText(mContext, "Clicked", ToastLength.Short).Show();
-            if (image.Selected == true)
-            {
-                image.Selected = false;
-               
-            }
-            else if (image.Selected == false)
-            {
-                image.Selected = true;
-            }
-            
-
-        }*/
     }
 }

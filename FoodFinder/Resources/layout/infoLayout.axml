@@ -11,9 +11,9 @@
 		android:minWidth="25px"
 		android:minHeight="25px"
 		android:id="@+id/DescriptionHeader"
-		android:textSize="16dp"
+		android:textSize="16sp"
 		android:textStyle="bold"
-		android:padding="5dp" />
+		android:padding="8dp" />
 	<TextView
 		android:text="Decription Default"
 		android:layout_width="wrap_content"
@@ -23,7 +23,9 @@
 		android:paddingLeft="5dp"
 		android:paddingTop="2dp"
 		android:paddingBottom="2dp"
-		android:paddingRight="5dp" />
+		android:paddingRight="5dp"
+		android:padding="8dp"
+		android:textSize="14sp" />
 	<TextView
 		android:text="Opening Times"
 		android:layout_width="wrap_content"
@@ -32,7 +34,7 @@
 		android:id="@+id/OpenTimesHeader"
 		android:textStyle="bold"
 		android:textSize="16dp"
-		android:padding="5dp" />
+		android:padding="8dp" />
 	<RelativeLayout
 		android:minWidth="25px"
 		android:minHeight="25px"
@@ -83,7 +85,7 @@
 			android:layout_height="wrap_content"
 			android:layout_toRightOf="@id/Tuesday"
 			android:id="@+id/TuesdayOpen"
-			android:layout_marginLeft="150dp"
+			android:layout_marginLeft="148dp"
 			android:layout_marginRight="5dp" />
 		<TextView
 			android:text="Close"
@@ -113,7 +115,7 @@
 			android:layout_height="wrap_content"
 			android:layout_toRightOf="@id/Wednesday"
 			android:id="@+id/WednesdayOpen"
-			android:layout_marginLeft="125dp"
+			android:layout_marginLeft="127dp"
 			android:layout_marginRight="5dp" />
 		<TextView
 			android:text="Close"
@@ -142,7 +144,7 @@
 			android:layout_height="wrap_content"
 			android:layout_toRightOf="@id/Thursday"
 			android:id="@+id/ThursdayOpen"
-			android:layout_marginLeft="150dp"
+			android:layout_marginLeft="142dp"
 			android:layout_marginRight="5dp" />
 		<TextView
 			android:text="Close"
@@ -172,7 +174,7 @@
 			android:layout_height="wrap_content"
 			android:layout_toRightOf="@id/Friday"
 			android:id="@+id/FridayOpen"
-			android:layout_marginLeft="150dp" />
+			android:layout_marginLeft="162dp" />
 		<TextView
 			android:text="Close"
 			android:layout_width="wrap_content"
@@ -201,7 +203,7 @@
 			android:layout_height="wrap_content"
 			android:layout_toRightOf="@id/Saturday"
 			android:id="@+id/SaturdayOpen"
-			android:layout_marginLeft="150dp"
+			android:layout_marginLeft="144dp"
 			android:layout_marginRight="5dp" />
 		<TextView
 			android:text="Close"
@@ -231,7 +233,7 @@
 			android:layout_height="wrap_content"
 			android:layout_toRightOf="@id/Sunday"
 			android:id="@+id/SundayOpen"
-			android:layout_marginLeft="150dp"
+			android:layout_marginLeft="153dp"
 			android:layout_marginRight="5dp" />
 		<TextView
 			android:text="Close"
@@ -248,7 +250,7 @@
 		android:id="@+id/ContactInfoHeader"
 		android:textSize="16dp"
 		android:textStyle="bold"
-		android:padding="5dp" />
+		android:padding="8dp" />
 	<LinearLayout
 		android:orientation="horizontal"
 		android:minWidth="25px"
@@ -258,7 +260,8 @@
 		android:layout_below="@id/ContactInfoHeader"
 		android:id="@+id/linearLayout1"
 		android:outlineProvider="none"
-		android:paddingLeft="5dp">
+		android:paddingLeft="5dp"
+		android:padding="8dp">
 		<ImageView
 			android:background="@drawable/smallphone"
 			android:layout_width="wrap_content"
@@ -272,7 +275,8 @@
 			android:layout_height="wrap_content"
 			android:id="@+id/ContactNumber"
 			android:layout_gravity="center_vertical"
-			android:textSize="14dp" />
+			android:textSize="14dp"
+			android:paddingLeft="2dp" />
 	</LinearLayout>
 	<TextView
 		android:text="Location"
@@ -282,7 +286,7 @@
 		android:id="@+id/LocationHeader"
 		android:textSize="16dp"
 		android:textStyle="bold"
-		android:padding="5dp" />
+		android:padding="8dp" />
 	<TextView
 		android:text="Address"
 		android:layout_width="wrap_content"
@@ -292,7 +296,8 @@
 		android:paddingLeft="5dp"
 		android:paddingTop="2dp"
 		android:paddingBottom="2dp"
-		android:paddingRight="5dp" />
+		android:paddingRight="5dp"
+		android:padding="8dp" />
 	
 
 </RelativeLayout>

@@ -40,21 +40,14 @@ namespace FoodFinder
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView1);
 
             getMenuItems(ID, menuType);
-            // Create your application here
         }
 
+        //get Menu items for restaurant
         async void getMenuItems(string ID, string menuType)
         {
             mMenuItems = new List<MenuItems>();
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/MenuItems/";
-
-            //uni IP
-            string uri = "http://10.201.37.145:45455/api/MenuItems/";
-
-            //string uri = "htp://192.168.1.70:45455/api/MenuItems/";
-
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/MenuItems/";
+            
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/MenuItems/";
             string otherhalf = "getMenuItems?ID=" + ID + "&menutype=" + menuType;
 
             Uri result = null;
@@ -73,6 +66,7 @@ namespace FoodFinder
         }
     }
 
+    //Binding menu items data to items view in recycler view
     public class MenuItemsRecyclerAdapter : RecyclerView.Adapter
     {
         private List<MenuItems> mMenuItems;
@@ -112,7 +106,6 @@ namespace FoodFinder
 
             myHolder.mItem.Text = mMenuItems[position].Item;
             myHolder.mPrice.Text = "£" + mMenuItems[position].Price;
-            Toast.MakeText(mcontext, mMenuItems[position].Price, ToastLength.Short).Show();
             myHolder.mDescription.Text = mMenuItems[position].Description;
         }
 

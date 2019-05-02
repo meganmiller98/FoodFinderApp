@@ -20,14 +20,15 @@ using Newtonsoft.Json;
 
 namespace FoodFinder
 {
-    [Activity(Label = "RestaurantProfileActivity")]
+    [Activity(Label = "RestaurantProfileActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class RestaurantProfileActivity : AppCompatActivity
     {
         public static string ID;
         ImageButton saveButton;
         List<favedRestaurants> mFavedRestaurants;
         RatingBar ratingBar;
-        //private string mID;
+        ViewPager viewPager;
+        Android.Support.Design.Widget.TabLayout tabLayout;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -49,11 +50,11 @@ namespace FoodFinder
 
             ratingBar = FindViewById<RatingBar>(Resource.Id.ratingBar1);
 
-            Android.Support.Design.Widget.TabLayout tabLayout = FindViewById<Android.Support.Design.Widget.TabLayout>(Resource.Id.tabLayout);
+            tabLayout = FindViewById<Android.Support.Design.Widget.TabLayout>(Resource.Id.tabLayout);
 
             saveButton = FindViewById<ImageButton>(Resource.Id.imageButton1);
 
-            ViewPager viewPager = FindViewById<ViewPager>(Resource.Id.viewPager);
+            viewPager = FindViewById<ViewPager>(Resource.Id.viewPager);
 
 
             var restaurantInfo = JsonConvert.DeserializeObject<Post>(Intent.GetStringExtra("RestaurantInfo"));
@@ -61,7 +62,7 @@ namespace FoodFinder
             var imageBitmap = ImageHelper.GetImageBitmapFromUrl(restaurantInfo.MainPhoto1);
             imageView.SetImageBitmap(imageBitmap);
 
-
+            
             textview1.Text = restaurantInfo.RestaurantName;
 
             if (restaurantInfo.Cost == "1")
@@ -99,7 +100,6 @@ namespace FoodFinder
             saveButton.Click += saveButtonClick;
 
             ratingBar.RatingBarChange += ratingClick;
-            //ratingBar.Click += ratingClick;
 
             SetSupportActionBar(toolbarNav);
             SetupViewPager(viewPager);
@@ -107,7 +107,6 @@ namespace FoodFinder
             tabLayout.SetupWithViewPager(viewPager);
 
             viewPager.AddOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
 
             checkIfUserHasSavedRestaurant(ID);
 
@@ -142,7 +141,7 @@ namespace FoodFinder
             string userID = prefs.GetString("userID", null);
             if (userID == null)
             {
-                Toast.MakeText(this, "You need to be signed in! ", ToastLength.Short).Show();
+                
                 Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
                 alert.SetTitle("Log In");
                 alert.SetMessage("You need to log in to submit a rating");
@@ -180,13 +179,7 @@ namespace FoodFinder
         {
             Ratings newRating = new Ratings(rating, ID, null, userID, null);
 
-            //katy
-            //string uri = "htp://192.168.1.70:45455/api/Ratings/SubmitRating";
-            //uni
-            string uri = "http://10.201.37.145:45455/api/Ratings/SubmitRating";
-            //my
-            //string uri = "htp://192.168.0.20:45455/api/Ratings/SubmitRating";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Ratings/SubmitRating/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Ratings/SubmitRating";
 
             Uri result = new Uri(uri);
             Console.WriteLine(result);
@@ -196,17 +189,16 @@ namespace FoodFinder
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             HttpResponseMessage refineResult = (await httpClient.PostAsync(result, content));
 
-            //await HandleResponse(refineResult);
             string serialized = await refineResult.Content.ReadAsStringAsync();
             Console.WriteLine(serialized);
             if (refineResult.IsSuccessStatusCode)
             {
                 Toast.MakeText(this, "Submitted", ToastLength.Short).Show();
-                //Intent intent = new Intent(this, typeof(RestaurantProfileActivity));
-                //intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(restaurantInfo);
-                //intent.PutExtra("RestaurantInfo", Intent.GetStringExtra("RestaurantInfo"));
-                //StartActivity(intent);
-                Finish();
+                
+                int i = tabLayout.SelectedTabPosition;
+                Console.WriteLine("this is the index " + i.ToString());
+                SetupViewPager(viewPager);
+                tabLayout.GetTabAt(i).Select(); 
             }
             else
             {
@@ -215,6 +207,7 @@ namespace FoodFinder
             
         }
 
+        //Check if user has saved the restaurant before, If they have set the heart icon state to represent this
         async void checkIfUserHasSavedRestaurant(string ID)
         {
             ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
@@ -228,18 +221,11 @@ namespace FoodFinder
             else
             {
                 mFavedRestaurants = new List<favedRestaurants>();
-                //myIp
-                //string uri = "htp://192.168.0.20:45455/api/favouriteRestaurants/";
-
-                //uni IP
-                string uri = "http://10.201.37.145:45455/api/favouriteRestaurants/";
-
-                //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/favouriteRestaurants/";
-
-                //string uri = "htp://192.168.1.70:45455/api/favouriteRestaurants/";
+                
+                string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/favouriteRestaurants/";
 
                 string otherhalf = "checkIfSaved?userID=" + userID + "&restaurantID=" + ID;
-                //string otherhalf = "checkIfSaved?userID=1&restaurantID=1";
+                
                 Uri result = null;
 
                 if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
@@ -271,6 +257,7 @@ namespace FoodFinder
             adapter.AddFragment(new RatingsFragment(), "Ratings");
             viewPage.Adapter = adapter;
             //viewPager.Adapter.NotifyDataSetChanged();
+
         }
 
 
@@ -279,21 +266,20 @@ namespace FoodFinder
             return ID;
         }
 
-
+        //save restaurant if user is logged in, if not prompt login
         void saveButtonClick(object sender, EventArgs e)
         {
-            Toast.MakeText(this, "Click", ToastLength.Short).Show();
+          
             ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
             string userID = prefs.GetString("userID", null);
             if (saveButton.Selected == true)
             {
                 saveButton.Selected = false;
-                //Toast.MakeText(this, "true to false", ToastLength.Short).Show();
-                
 
                 if (userID == null)
                 {
-                    Toast.MakeText(this, "User Not Logged In", ToastLength.Short).Show();
+                    //Toast.MakeText(this, "User Not Logged In", ToastLength.Short).Show();
+                    Console.WriteLine("User not logged in");
                 }
                 else
                 {
@@ -302,6 +288,7 @@ namespace FoodFinder
             }
             else
             {
+                //prompy user to login then take them to login page
                 if (userID == null)
                 {
                     Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
@@ -309,7 +296,6 @@ namespace FoodFinder
                     alert.SetMessage("You need to log in to add restaurants to favourites");
                     alert.SetPositiveButton("Log In", (senderAlert, args) => {
                         Intent intent = new Intent(this, typeof(LogInActivity));
-                        //intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(restaurantInfo);
                         intent.PutExtra("RestaurantInfo", Intent.GetStringExtra("RestaurantInfo"));
                         StartActivity(intent);
                         Finish();
@@ -323,7 +309,6 @@ namespace FoodFinder
                 else
                 {
                     saveButton.Selected = true;
-                    //Toast.MakeText(this, "false to true", ToastLength.Short).Show();
                     saveRestaurant(userID);
                 }
             }
@@ -332,17 +317,11 @@ namespace FoodFinder
 
         async void deleteSavedRestaurant(string userID)
         {
-            //string uri = "htp://192.168.1.70:45455/api/favouriteRestaurants/";
-
-            //uni
-            string uri = "http://10.201.37.145:45455/api/favouriteRestaurants/";
-
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/favouriteRestaurants/";
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/favouriteRestaurants/";
+            
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/favouriteRestaurants/";
 
             string otherhalf = "deleteSaved?userID=" + userID + "&restaurantID=" + ID;
-            //string otherhalf = "checkIfSaved?userID=1&restaurantID=1";
+            
             Uri result = null;
 
             if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
@@ -352,7 +331,6 @@ namespace FoodFinder
                 if (refineResult.IsSuccessStatusCode)
                 {
                     Console.WriteLine("successfully deleted.");
-                    Toast.MakeText(this, "Removed from favourites", ToastLength.Short).Show();
                 }
             }
         }
@@ -362,14 +340,7 @@ namespace FoodFinder
         {
             favedRestaurants fav = new favedRestaurants(userID, ID, null);
 
-            //string uri = "htp://192.168.1.70:45455/api/favouriteRestaurants/Save";
-
-            //uni
-            //string uri = "htp://10.201.37.145:45455/api/favouriteRestaurants/Save";
             string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/favouriteRestaurants/Save";
-
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/favouriteRestaurants/Save";
 
             Uri result = new Uri(uri);
             Console.WriteLine(result);
@@ -379,7 +350,6 @@ namespace FoodFinder
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             HttpResponseMessage refineResult = (await httpClient.PostAsync(result, content));
 
-            //await HandleResponse(refineResult);
             string serialized = await refineResult.Content.ReadAsStringAsync();
             Console.WriteLine(serialized);
             if (refineResult.IsSuccessStatusCode)
@@ -397,19 +367,24 @@ namespace FoodFinder
     public class Adapter : FragmentPagerAdapter
     {
         List<Android.Support.V4.App.Fragment> fragments = new List<Android.Support.V4.App.Fragment>();
+
         List<string> fragmentTitles = new List<string>();
+
         public Adapter(Android.Support.V4.App.FragmentManager fm) : base(fm) { }
+
         public void AddFragment(Android.Support.V4.App.Fragment fragment, String title)
         {
             fragments.Add(fragment);
             fragmentTitles.Add(title);
         }
+
         public override int Count { get { return fragments.Count; } }
 
         public override Android.Support.V4.App.Fragment GetItem(int position)
         {
             return fragments[position];
         }
+
         public override Java.Lang.ICharSequence GetPageTitleFormatted(int position)
         {
             return new Java.Lang.String(fragmentTitles[position]);

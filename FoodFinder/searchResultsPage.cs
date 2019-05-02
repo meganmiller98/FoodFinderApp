@@ -32,7 +32,6 @@ namespace FoodFinder
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your fragment here
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -48,11 +47,11 @@ namespace FoodFinder
 
             getLastKnownLocation();
 
+            //check if their are any additional refinements to the search then execute query according to chosen search by category.
             if (Arguments != null)
             {
                 option = Arguments.GetString("option");
                 searchedString = Arguments.GetString("searchedString");
-                //String value3 = Arguments.GetString("openNow");
                 test.Text = option + " " + searchedString;
 
                 if(Arguments.GetString("sort") != null && Arguments.GetString("dietary") != null && Arguments.GetString("openNow") != null && option == "category")
@@ -105,14 +104,8 @@ namespace FoodFinder
 
         async void ShowCategoryResults(string searchedString, ListView listview)
         {
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
 
-            //uni IP
-            string uri = "http://10.201.37.145:45455/api/mainmenu/";
-
-            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
             string otherhalf = "GetRestaurantsAccordingToCategories?lon=" + lon + "&lat=" + lat + "&category=" + searchedString;
 
             Uri result = null;
@@ -134,29 +127,19 @@ namespace FoodFinder
                     listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
                     {
                         string restName = RestaurantList[e.Position].RestaurantName;
-                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
                         Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
                         intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
                         StartActivity(intent);
                     };
                 }
 
-
-                //test.Text = result.AbsoluteUri;
             }
         }
 
 
         async void ShowCuisineResults(string searchedString, ListView listview)
         {
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
-
-            //uni IP
-            string uri = "http://10.201.37.145:45455/api/mainmenu/";
-
-            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
             string otherhalf = "GetRestaurantsAccordingToCuisines?lon=" + lon + "&lat=" + lat + "&cuisine=" + searchedString;
 
             Uri result = null;
@@ -178,27 +161,19 @@ namespace FoodFinder
                     listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
                     {
                         string restName = RestaurantList[e.Position].RestaurantName;
-                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                        //Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
                         Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
                         intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
                         StartActivity(intent);
                     };
                 }
 
-                //test.Text = result.AbsoluteUri;
             }
         }
 
         async void ShowDishesResults(string searchedString, ListView listview)
         {
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
-
-            //uni IP
-            string uri = "http://10.201.37.145:45455/api/mainmenu/";
-
-            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
             string otherhalf = "GetRestaurantsAccordingToDish?lon=" + lon + "&lat=" + lat + "&dish=" + searchedString;
 
             Uri result = null;
@@ -220,27 +195,20 @@ namespace FoodFinder
                     listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
                     {
                         string restName = RestaurantList[e.Position].RestaurantName;
-                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                       // Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
                         Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
                         intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
                         StartActivity(intent);
                     };
                 }
 
-                //test.Text = result.AbsoluteUri;
             }
         }
 
         async void refineCategoryResults(ListView listview)
         {
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
 
-            //uni IP
-            string uri = "http://10.201.37.145:45455/api/mainmenu/";
-
-            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
             string otherhalf = "CategoryRefinements?lat=" + lat + "&lon=" + lon + "&category=" + searchedString + "&sort=" +sort+ "&dietary=" +dietary+ "&openNow=" +openNow;
 
             Uri result = null;
@@ -262,27 +230,19 @@ namespace FoodFinder
                     listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
                     {
                         string restName = RestaurantList[e.Position].RestaurantName;
-                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                        //Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
                         Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
                         intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
                         StartActivity(intent);
                     };
                 }
-
-                //test.Text = result.AbsoluteUri;
             }
         }
 
         async void refineCuisineResults(ListView listview)
         {
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
 
-            //uni IP
-            string uri = "http://10.201.37.145:45455/api/mainmenu/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
-
-            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
             string otherhalf = "CuisineRefinements?lat=" + lat + "&lon=" + lon + "&cuisine=" + searchedString + "&sort=" + sort + "&dietary=" + dietary + "&openNow=" + openNow;
 
             Uri result = null;
@@ -304,7 +264,7 @@ namespace FoodFinder
                     listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
                     {
                         string restName = RestaurantList[e.Position].RestaurantName;
-                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                        //Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
                         Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
                         intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
                         StartActivity(intent);
@@ -317,14 +277,7 @@ namespace FoodFinder
 
         async void refineDishResults(ListView listview)
         {
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
-
-            //uni IP
-            string uri = "http://10.201.37.145:45455/api/mainmenu/";
-
-            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
             string otherhalf = "DishRefinements?lat=" + lat + "&lon=" + lon + "&dish=" + searchedString + "&sort=" + sort + "&dietary=" + dietary + "&openNow=" + openNow;
 
             Uri result = null;
@@ -346,20 +299,19 @@ namespace FoodFinder
                     listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
                     {
                         string restName = RestaurantList[e.Position].RestaurantName;
-                        Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
+                        //Toast.MakeText(Context as Activity, restName, ToastLength.Short).Show();
                         Intent intent = new Intent(Context as Activity, typeof(RestaurantProfileActivity));
                         intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[e.Position]));
                         StartActivity(intent);
                     };
                 }
-
-                //test.Text = result.AbsoluteUri;
+                
             }
         }
 
         void button_Click(object sender, EventArgs e)
         {
-            //show fragment
+            //show refinemenet dialog fragment
             searchRefineDialog refineDialog = new searchRefineDialog();
             Bundle args = new Bundle();
             args.PutString("sort", sort);
@@ -384,7 +336,6 @@ namespace FoodFinder
                 {
                     lat = location.Latitude.ToString();
                     lon = location.Longitude.ToString();
-                    //test.Text = location.Latitude.ToString() + " " + location.Longitude.ToString();
                 }
                 else
                 {

@@ -23,6 +23,7 @@ namespace FoodFinder
         private RecyclerView.Adapter mAdapter;
         private List<savedRestaurants> mRestaurants;
         TextView nothingSavedMessage;
+        TextView noVouchers;
 
         private RecyclerView nRecyclerView;
         private RecyclerView.LayoutManager nLayoutManager;
@@ -45,6 +46,7 @@ namespace FoodFinder
 
             View view = inflater.Inflate(Resource.Layout.ProfilePage, container, false);
 
+            //check if user is logged
             ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
             string name = prefs.GetString("name", null);
             string userID = prefs.GetString("userID", null);
@@ -63,6 +65,7 @@ namespace FoodFinder
                 mRecyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerViewRestaurants);
                 TextView nameText = view.FindViewById<TextView>(Resource.Id.welcomeText);
                 nothingSavedMessage = view.FindViewById<TextView>(Resource.Id.textSaveMessage);
+                noVouchers = view.FindViewById<TextView>(Resource.Id.textSaveMessage2);
                 nameText.Text = name;
 
                 Button logOut = view.FindViewById<Button>(Resource.Id.logOutButton);
@@ -89,15 +92,10 @@ namespace FoodFinder
         }
         async void getSavedRestaurants(string userID)
         {
+            Console.WriteLine("in getSaved Method");
             mRestaurants = new List<savedRestaurants>();
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/SavedRestaurant/";
 
-            //uni IP
-            string uri = "http://10.201.37.145:45455/api/SavedRestaurant/";
-
-            //string uri = "htp://192.168.1.70:45455/api/SavedRestaurant/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/SavedRestaurant/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/SavedRestaurant/";
 
             string otherhalf = "getSaved?userID= " + userID;
 
@@ -112,8 +110,10 @@ namespace FoodFinder
                 if (mRestaurants.Count > 0)
                 {
                     nothingSavedMessage.Visibility = Android.Views.ViewStates.Gone;
+                    //positions items in recycler view
                     mLayoutManager = new LinearLayoutManager(Context as Activity, LinearLayoutManager.Horizontal, false);
                     mRecyclerView.SetLayoutManager(mLayoutManager);
+                    //Binds the mRestaurants data with the view items in recycler view
                     mAdapter = new SavedRestaurantsRecyclerAdapter(mRestaurants, mRecyclerView, Context as Activity);
                     mRecyclerView.SetAdapter(mAdapter);
                 }
@@ -128,15 +128,10 @@ namespace FoodFinder
         }
         async void getSavedVouchers(string userID)
         {
+            Console.WriteLine("In the get saved vouchers method");
             nSavedVouchers = new List<Vouchers>();
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/Voucher/";
 
-            //uni IP
-            string uri = "http://10.201.37.145:45455/api/Voucher/";
-
-            //string uri = "htp://192.168.1.70:45455/api/SavedRestaurant/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Voucher/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Voucher/";
 
             string otherhalf = "getUsersSavedVouchers?userID= " + userID;
 
@@ -148,9 +143,10 @@ namespace FoodFinder
                 var refineResult = (await httpClient.GetStringAsync(result));
                 nSavedVouchers = JsonConvert.DeserializeObject<List<Vouchers>>(refineResult);
 
-                if (mRestaurants.Count > 0)
+                if (nSavedVouchers.Count > 0)
                 {
-                    //nothingSavedMessage.Visibility = Android.Views.ViewStates.Gone;
+                    noVouchers.Visibility = Android.Views.ViewStates.Gone;
+                    Console.WriteLine("In the saved Vouchers page");
                     nLayoutManager = new LinearLayoutManager(Context as Activity, LinearLayoutManager.Horizontal, false);
                     nRecyclerView.SetLayoutManager(nLayoutManager);
                     nAdapter = new SavedVouchersRecyclerAdapter(nSavedVouchers, nRecyclerView, Context as Activity);
@@ -158,7 +154,7 @@ namespace FoodFinder
                 }
                 else
                 {
-                    //nothingSavedMessage.Visibility = Android.Views.ViewStates.Visible;
+                    noVouchers.Visibility = Android.Views.ViewStates.Visible;
                 }
 
 
@@ -201,6 +197,7 @@ namespace FoodFinder
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
+            Console.WriteLine("In the saved restaurant adpater on bind");
             savedRestaurantsView myHolder = holder as savedRestaurantsView;
             Console.Write(mRestaurants[position].MainPhoto);
             myHolder.mMainPhoto.SetImageBitmap(ImageHelper.GetImageBitmapFromUrl(mRestaurants[position].MainPhoto));
@@ -213,26 +210,17 @@ namespace FoodFinder
         {
 
             int position = mRecyclerView.GetChildAdapterPosition((View)sender);
-            //int indexPosition = (mMenuType.Count) - position;
-            //string namewoo = (mMenuType[position].Menu);
-            //Console.WriteLine(mRestaurants[position].PhotoFilePath);
+            
             getInfoForRestaurantProfile(position);
-            //Intent intent = new Intent(mcontext, typeof(RestaurantProfileActivity));
-            //intent.PutExtra("PhotoFilePath", mPhotos[position].PhotoFilePath);
-            //intent.PutExtra("PhotoID", mPhotos[position].IDPhotos);
-            //mcontext.StartActivity(intent);
+           
 
         }
         async void getInfoForRestaurantProfile(int position)
         {
-
-            //string uri = "htp://192.168.0.20:45455/api/mainmenu/";
-            string uri = "http://10.201.37.145:45455/api/mainmenu/";
-            //string uri = "htp://192.168.1.70:45455/api/mainmenu/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/mainmenu/";
 
             string otherhalf = "getInfoForProfile?ID=" + mRestaurants[position].RestaurantID.ToString();
-            //test.Text = otherhalf;
+            
             Uri result = null;
 
             if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
@@ -246,8 +234,6 @@ namespace FoodFinder
                 }
                 else
                 {
-                    //isProfile isProfile = new isProfile(true);
-
 
                     Intent intent = new Intent(mcontext, typeof(RestaurantProfileActivity));
                     intent.PutExtra("RestaurantInfo", JsonConvert.SerializeObject(RestaurantList[0]));
@@ -258,18 +244,10 @@ namespace FoodFinder
 
             }
         }
-        /* public class isProfile
-         {
-             public bool fromUserProfile { get; set; }
 
-             public isProfile (bool fromUserProfile)
-             {
-                 this.fromUserProfile = fromUserProfile;
-             }
-         }*/
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-
+            Console.WriteLine("In the view holder restaurant adpater");
             View row = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.profileSavedRestuarants, parent, false);
 
             ImageView image = row.FindViewById<ImageView>(Resource.Id.restaurantImage);

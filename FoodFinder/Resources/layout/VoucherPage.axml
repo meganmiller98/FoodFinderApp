@@ -23,14 +23,16 @@
 				android:text="Vouchers"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:id="@+id/textView1" />
+				android:id="@+id/textView1"
+				android:textStyle="bold"
+				android:textSize="18dp"
+				android:textColor="#ff242323" />
 		</Toolbar>
 		<TextView
-				android:text="Vouchers"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_below="@id/toolbar1"
-				android:id="@+id/textView2" />
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/toolbar1"
+			android:id="@+id/textView2" />
 		<ListView
 			android:minWidth="25px"
 			android:minHeight="25px"

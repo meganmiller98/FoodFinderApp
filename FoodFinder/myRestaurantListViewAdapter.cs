@@ -14,6 +14,7 @@ using Android.Widget;
 
 namespace FoodFinder
 { 
+    //displaying the layout for each item in the restaurant (POST) list
     class myRestaurantListViewAdapter : BaseAdapter<Post>
     {
         private List<Post> mItems;
@@ -47,8 +48,6 @@ namespace FoodFinder
                 restaurant = LayoutInflater.From(mContext).Inflate(Resource.Layout.listview_restaurant, null, false);
             }
 
-            //Using ImageHelper class
-            //MainPhoto1 in post
             ImageView restaurantImg = restaurant.FindViewById<ImageView>(Resource.Id.RestaurantImage);
             var imageBitmap = ImageHelper.GetImageBitmapFromUrl(mItems[position].MainPhoto1);
             restaurantImg.SetImageBitmap(imageBitmap);
@@ -60,7 +59,11 @@ namespace FoodFinder
             category.Text = mItems[position].Categories;
 
             TextView times = restaurant.FindViewById<TextView>(Resource.Id.Time);
-            times.Text = mItems[position].Opentimes + " - " + mItems[position].CloseTimes;
+            string open = mItems[position].Opentimes.ToString();
+            open = open.Remove(5);
+            string close = mItems[position].CloseTimes.ToString();
+            close = close.Remove(5);
+            times.Text = open + " - " + close;
 
             TextView rating = restaurant.FindViewById<TextView>(Resource.Id.Rating);
             rating.Text = mItems[position].Rating + "/5";

@@ -56,7 +56,8 @@
 					android:id="@+id/textView1"
 					android:textStyle="bold"
 					android:textSize="18dp"
-					android:paddingBottom="5dp" />
+					android:paddingBottom="5dp"
+					android:padding="4dp" />
 				<TextView
 					android:text="Cost"
 					android:layout_width="wrap_content"
@@ -64,15 +65,14 @@
 					android:layout_below="@id/textView1"
 					android:id="@+id/textView2"
 					android:textSize="16dp"
-					android:paddingBottom="3dp" />
+					android:padding="4dp" />
 				<TextView
 					android:text="Burgers"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_below="@id/textView2"
 					android:id="@+id/textView3"
-					android:textSize="16dp"
-					android:paddingBottom="3dp" />
+					android:textSize="16dp" />
 				<RatingBar
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -80,13 +80,15 @@
 					android:layout_below="@id/textView3"
 					android:theme="@style/RatingBar"
 					android:numStars="5"
-					android:stepSize="1" />
+					android:stepSize="1"
+					android:padding="4dp" />
 				<ImageButton
 					android:background= "@drawable/saveButtonSelect"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_below="@id/ratingBar1"
-					android:id="@+id/imageButton1" />
+					android:id="@+id/imageButton1"
+					android:layout_marginLeft="4dp" />
 			</RelativeLayout>
 			
 

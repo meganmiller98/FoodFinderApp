@@ -15,7 +15,7 @@ using Newtonsoft.Json;
 
 namespace FoodFinder
 {
-    [Activity(Label = "SignUpActivity")]
+    [Activity(Label = "SignUpActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class SignUpActivity : Activity
     {
         EditText name;
@@ -48,11 +48,18 @@ namespace FoodFinder
 
 
         }
+
+        //Check all fields have been filled in accurately
         void confirmedClick(object sender, EventArgs e)
         {
-            if (name.Text.Trim() != "" && email.Text.Trim() != "" && password1.Text.Trim() != "" && password1.Text.Trim() == password2.Text.Trim())
+            
+           if (name.Text.Trim() != "" && Android.Util.Patterns.EmailAddress.Matcher(email.Text).Matches() && password1.Text.Trim() != "" && password1.Text.Trim() == password2.Text.Trim())
             {
-                signUpUser(name.Text, email.Text, password1.Text);
+                checkIfExists(name.Text, email.Text, password1.Text);
+            }
+           else if(!Android.Util.Patterns.EmailAddress.Matcher(email.Text).Matches())
+            {
+                Toast.MakeText(this, "Not a valid email", ToastLength.Short).Show();
             }
             else if (password1.Text.Trim() != password2.Text.Trim())
             {
@@ -67,16 +74,41 @@ namespace FoodFinder
                 Toast.MakeText(this, "please check your credentials", ToastLength.Short).Show();
             }
         }
-        async void signUpUser(string name, string email, string password)
+
+        //Check if User already exists
+        async void checkIfExists(string name, string email, string password)
+        {
+            
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Users/";
+
+            string otherhalf = "checkIfExists?email=" + email;
+
+            Uri result = null;
+
+            if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
+            {
+                var httpClient = new HttpClient();
+                var refineResult = (await httpClient.GetStringAsync(result));
+                List<User> users = JsonConvert.DeserializeObject<List<User>>(refineResult);
+                if (users.Count > 0)
+                {
+                    Toast.MakeText(this, "User with this email already exists", ToastLength.Short).Show();
+
+                }
+                else 
+                {
+                    signUpUser(email, password, name);
+                }
+
+            }
+        }
+
+        //Sign up user
+        async void signUpUser(string email, string password, string name)
         {
             User user = new User(null, name, email, password, null);
 
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/Users/addUser";
-            //uni
-            string uri = "http://10.201.37.145:45455/api/Users/addUser";
-            //string uri = "htp://192.168.1.70:45455/api/Users/addUser";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Users/addUser";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Users/addUser";
 
             Uri result = new Uri(uri);
             Console.WriteLine(result);
@@ -85,8 +117,7 @@ namespace FoodFinder
             var content = new StringContent(JsonConvert.SerializeObject(user));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             HttpResponseMessage refineResult = (await httpClient.PostAsync(result, content));
-
-            //await HandleResponse(refineResult);
+            
             string serialized = await refineResult.Content.ReadAsStringAsync();
             Console.WriteLine(serialized);
             if (refineResult.IsSuccessStatusCode)
@@ -99,16 +130,13 @@ namespace FoodFinder
                 Toast.MakeText(this, "Something went wrong", ToastLength.Short).Show();
             }
         }
+
+        //Check credentials are in database and store them to the Shared Preferences within the app
         async void validateUsers(string email, string password, string name)
         {
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/Users/";
 
-            //uni IP
-            string uri = "http://10.201.37.145:45455/api/Users/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Users/";
-
-            //string uri = "htp://192.168.1.70:45455/api/Users/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Users/";
+            
             string otherhalf = "validateUser?email=" + email + "&password=" + password;
 
             Uri result = null;
@@ -131,7 +159,6 @@ namespace FoodFinder
                     editor.PutString("password", password);
                     editor.Apply();
 
-                    Toast.MakeText(this, email, ToastLength.Short).Show();
                     Finish();
                     Intent intent = new Intent(this, typeof(MainActivity));
                     intent.PutExtra("frgToLoad", "profilePage");

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="200dp">
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="300dp"
+		android:layout_height="wrap_content"
+		android:id="@+id/relativeLayout1" >
+		<ImageButton
+			android:background="@drawable/ic_closeIcon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/closeButton"
+			android:layout_alignParentRight="true" />
+	</RelativeLayout>
+	<TextView
+		android:text="Voucher Code"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/voucherHeading"
+		android:layout_gravity="center_horizontal"
+		android:textSize="16dp" />
+	<TextView
+		android:text="VOUCHERCODE"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/voucherCode"
+		android:layout_gravity="center_horizontal"
+		android:textStyle="bold"
+		android:textSize="20dp"
+		android:padding="10dp" />
+	<Button
+		android:text="Done"
+		android:layout_width="200dp"
+		android:layout_height="wrap_content"
+		android:background="?android:attr/colorAccent"
+		android:id="@+id/button1"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginBottom="20dp" />
+</LinearLayout>

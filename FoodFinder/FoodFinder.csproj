@@ -59,7 +59,6 @@
     <Compile Include="Email.cs" />
     <Compile Include="favedRestaurants.cs" />
     <Compile Include="FragmentDialogClass.cs" />
-    <Compile Include="FragmentTest.cs" />
     <Compile Include="HomePage.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="InfoTabFragment.cs" />
@@ -88,7 +87,9 @@
     <Compile Include="searchRefineDialog.cs" />
     <Compile Include="searchResultsPage.cs" />
     <Compile Include="SignUpActivity.cs" />
+    <Compile Include="SplashScreenActivity.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="VoucherCodeDialogFragment.cs" />
     <Compile Include="VoucherInfoActivity.cs" />
     <Compile Include="VoucherPage.cs" />
     <Compile Include="VoucherPageListViewAdapter.cs" />
@@ -329,6 +330,26 @@
     <AndroidResource Include="Resources\layout\profileSavedVouchers.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_closeIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\voucherCodeDialog.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\splash_screen.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_logo_white_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\smallerLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\starIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

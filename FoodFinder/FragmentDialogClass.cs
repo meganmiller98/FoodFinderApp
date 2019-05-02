@@ -65,9 +65,8 @@ namespace FoodFinder
             applyButton = view.FindViewById<Button>(Resource.Id.applyButton);
             applyButton.Click += button_Click_Apply;
 
-            //distanceBox.Checked = true;
-            //noDietary.Checked = true;
-
+           
+            //setting the refinements to the previous state
             if (Arguments != null)
             {
                 if (Arguments.GetString("sort") != null)
@@ -131,11 +130,12 @@ namespace FoodFinder
                 }
             }
 
+            //Making sure only one item per category is selected at any time.
             distanceBox.Click += (o, e) =>
             {
                 if (distanceBox.Checked)
                 {
-                    Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
                     ratingBox.Checked = false;
                     mostPopBox.Checked = false;
                     lowPriceBox.Checked = false;
@@ -143,14 +143,14 @@ namespace FoodFinder
                 }
                 else
                 {
-                    Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
                 }
             };
             ratingBox.Click += (o, e) =>
             {
                 if (ratingBox.Checked)
                 {
-                    Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
                     distanceBox.Checked = false;
                     mostPopBox.Checked = false;
                     lowPriceBox.Checked = false;
@@ -158,14 +158,14 @@ namespace FoodFinder
                 }
                 else
                 {
-                    Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
                 }
             };
             mostPopBox.Click += (o, e) =>
             {
                 if (mostPopBox.Checked)
                 {
-                    Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
                     ratingBox.Checked = false;
                     distanceBox.Checked = false;
                     lowPriceBox.Checked = false;
@@ -173,14 +173,14 @@ namespace FoodFinder
                 }
                 else
                 {
-                    Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
                 }
             };
             lowPriceBox.Click += (o, e) =>
             {
                 if (lowPriceBox.Checked)
                 {
-                    Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
                     ratingBox.Checked = false;
                     distanceBox.Checked = false;
                     mostPopBox.Checked = false;
@@ -188,14 +188,14 @@ namespace FoodFinder
                 }
                 else
                 {
-                    Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
                 }
             };
             highPriceBox.Click += (o, e) =>
             {
                 if (highPriceBox.Checked)
                 {
-                    Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
                     ratingBox.Checked = false;
                     distanceBox.Checked = false;
                     lowPriceBox.Checked = false;
@@ -203,63 +203,63 @@ namespace FoodFinder
                 }
                 else
                 {
-                    Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
                 }
             };
             noDietary.Click += (o, e) =>
             {
                 if (noDietary.Checked)
                 {
-                    Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
                     vegetarianBox.Checked = false;
                     veganBox.Checked = false;
                     glutenFreeBox.Checked = false;
                 }
                 else
                 {
-                    Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
                 }
             };
             vegetarianBox.Click += (o, e) =>
             {
                 if (vegetarianBox.Checked)
                 {
-                    Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
                     noDietary.Checked = false;
                     veganBox.Checked = false;
                     glutenFreeBox.Checked = false;
                 }
                 else
                 {
-                    Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
                 }
             };
             veganBox.Click += (o, e) =>
             {
                 if (veganBox.Checked)
                 {
-                    Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
                     noDietary.Checked = false;
                     vegetarianBox.Checked = false;
                     glutenFreeBox.Checked = false;
                 }
                 else
                 {
-                    Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
                 }
             };
             glutenFreeBox.Click += (o, e) =>
             {
                 if (glutenFreeBox.Checked)
                 {
-                    Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Selected", ToastLength.Short).Show();
                     noDietary.Checked = false;
                     vegetarianBox.Checked = false;
                     veganBox.Checked = false;
                 }
                 else
                 {
-                    Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
+                    //Toast.MakeText(this.Context as Activity, "Unselected", ToastLength.Short).Show();
                 }
             };
             OpenNowSwitch.Click += (o, e) =>
@@ -276,7 +276,7 @@ namespace FoodFinder
             return view;
         }
 
-
+        //set sort, dietary and open now variables
         void button_Click_Apply(object sender, EventArgs e)
         {
             if (distanceBox.Checked)
@@ -299,6 +299,10 @@ namespace FoodFinder
             {
                 sort = "high";
             }
+            else
+            {
+                sort = "distance";
+            }
 
             if (noDietary.Checked)
             {
@@ -316,6 +320,10 @@ namespace FoodFinder
             {
                 dietary = "glutenfree";
             }
+            else
+            {
+                dietary = "none";
+            }
 
             if(OpenNowSwitch.Checked)
             {
@@ -326,6 +334,7 @@ namespace FoodFinder
                 openNow = "no";
             }
 
+            //Passing the arguments to the home page to be sent as parameters to the API
             HomePage fragment = new HomePage();
             Bundle args = new Bundle();
             args.PutString("sort", sort);

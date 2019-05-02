@@ -48,12 +48,11 @@
 			android:layout_height="wrap_content"
 			android:id="@+id/relativeLayout1" >
 			<ImageView
-				android:layout_width="50dp"
-				android:layout_height="50dp"
+				android:layout_width="45dp"
+				android:layout_height="45dp"
 				android:background="@drawable/ic_profile"
 				android:id="@+id/imageView1"
-				android:layout_centerHorizontal="true"
-				android:padding="30dp" />
+				android:layout_centerHorizontal="true" />
 			<TextView
 				android:text="Welcome"
 				android:layout_width="wrap_content"
@@ -61,7 +60,8 @@
 				android:layout_below="@id/imageView1"
 				android:id="@+id/welcomeText"
 				android:layout_centerHorizontal="true"
-				android:textSize="18dp" />
+				android:textSize="14dp"
+				android:textStyle="bold" />
 		</RelativeLayout>
 		<TextView
 			android:text="Favourite Restaurants"
@@ -102,6 +102,11 @@
 			android:layout_height="180dp"
 			android:background="#f2f2f2"
 			android:id="@+id/linearLayout3">
+			<TextView
+				android:text="No saved Vouchers."
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:id="@+id/textSaveMessage2" />
 			<android.support.v7.widget.RecyclerView
 				android:minWidth="25px"
 				android:minHeight="25px"

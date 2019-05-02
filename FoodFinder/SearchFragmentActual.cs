@@ -18,18 +18,15 @@ namespace FoodFinder
 {
     public class SearchFragmentActual : Fragment 
     {
-        //TextView categoryTextView;
         EditText edittext;
         TextView dishesSearchOption;
         TextView categorySearchOption;
         TextView cuisineSearchOption;
-        //TextView text;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
+            
 
         }
 
@@ -59,8 +56,10 @@ namespace FoodFinder
 
             TextView infoText = view.FindViewById<TextView>(Resource.Id.infoText);
            
+            //putting the search icon to the left of the edit text widget
             edittext.SetCompoundDrawablesWithIntrinsicBounds(Resource.Drawable.baseline_search_24, 0, 0, 0);
 
+            //if keyboard enter button is pressed put searched items under each category heading
             edittext.KeyPress += (object sender, View.KeyEventArgs e) => {
                e.Handled = false;
                if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
@@ -69,7 +68,6 @@ namespace FoodFinder
                    categorySearchOption.Text = edittext.Text;
                    cuisineSearchOption.Text = edittext.Text;
                    dishesSearchOption.Text = edittext.Text;
-                   Toast.MakeText(Context as Activity, edittext.Text, ToastLength.Short).Show();
                    e.Handled = true;
                }
            };
@@ -81,13 +79,14 @@ namespace FoodFinder
             return view;
         }
 
+        //setting variables for search by category executed
        void category_click(object sender, EventArgs e)
        {
             string option = "category";
             string searchedstring = categorySearchOption.Text;
             createResultsFragment(option, searchedstring);
        }
-
+        //setting variables for search by cuisine executed
         void cuisine_click(object sender, EventArgs e)
         {
             string option = "cuisine";
@@ -95,6 +94,7 @@ namespace FoodFinder
             createResultsFragment(option, searchedstring);
         }
 
+        //setting variables for search by dish executed
         void dishes_click(object sender, EventArgs e)
         {
             string option = "dishes";
@@ -102,6 +102,7 @@ namespace FoodFinder
             createResultsFragment(option, searchedstring);
         }
 
+        //send info to the  SearchFragmentActual fragment to execute the search queries
         public void createResultsFragment(string option, string searchedString)
         {
             
@@ -112,7 +113,6 @@ namespace FoodFinder
             args.PutString("searchedString", searchedString);
             resultsPage.Arguments = args;
 
-            //var fragmentTransaction = FragmentManager.BeginTransaction();
             FragmentTransaction fragmentTransaction = this.Activity.FragmentManager.BeginTransaction();
             fragmentTransaction.Replace(Resource.Id.frame, resultsPage);
             fragmentTransaction.AddToBackStack("SearchFragmentActual");

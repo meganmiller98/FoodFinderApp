@@ -26,8 +26,6 @@ namespace FoodFinder
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
         }
 
         public VoucherPage()
@@ -36,9 +34,6 @@ namespace FoodFinder
         }
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-
             View view = inflater.Inflate(Resource.Layout.VoucherPage, container, false);
             Toolbar toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar1);
             TextView toolbarText = view.FindViewById<TextView>(Resource.Id.textView1);
@@ -49,18 +44,12 @@ namespace FoodFinder
             return view;
         }
 
+        //Get vouchers from database to be displayed in list
         async void getVouchers(ListView listview)
         {
-            //my
-            //string uri = "htp://192.168.0.20:45455/api/Voucher/";
-            //uni
-            string uri = "http://10.201.37.145:45455/api/Voucher/";
-            //Katy
-            //string uri = "htp://192.168.1.70:45455/api/Voucher/";
-
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Voucher/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Voucher/";
             string otherhalf = "getVouchers?lat=" + lat + "&lon=" + lon;
-            //test.Text = otherhalf;
+
             Uri result = null;
 
             if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
@@ -76,7 +65,7 @@ namespace FoodFinder
                 {
                     VoucherPageListViewAdapter adapter = new VoucherPageListViewAdapter(this.Context as Activity, VoucherList);
                     listview.Adapter = adapter;
-
+                    resultInfo.Text = "Vouchers nearby: ";
                     listview.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
                     {
                         string restName = VoucherList[e.Position].restName;

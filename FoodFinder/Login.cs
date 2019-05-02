@@ -82,14 +82,10 @@ namespace FoodFinder
             }
 
         }
+
+        //check user credentials are valid 
         async void validateUsers()
         {
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/Users/";
-
-            //uni IP
-            //string uri = "htp://10.201.37.145:45455/api/Users/";
-
             string uri = "http://192.168.1.70:45455/api/Users/";
             string otherhalf = "validateUser?email=" + mUsername.Text + "&password=" + mPassword.Text;
 
@@ -113,7 +109,7 @@ namespace FoodFinder
                     editor.Apply();
 
                     Toast.MakeText(Context as Activity, mUsername.Text, ToastLength.Short).Show();
-                    help();
+                    saveCredentials();
                 }
                 else
                 {
@@ -123,7 +119,7 @@ namespace FoodFinder
             }
         }
 
-        public void help ()
+        public void saveCredentials()
         {
             ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
             string userID = prefs.GetString("userID", null);

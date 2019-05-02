@@ -14,8 +14,8 @@ using Android.Widget;
 
 namespace FoodFinder
 {
-    //www.youtube.com/watch?v=6cKkS2rZa4E got from
-    //used in myRestaurantListViewAdapter to display restaurant's main image
+    //code from www.youtube.com/watch?v=6cKkS2rZa4E
+    //used to display all images from the database.
     class ImageHelper
     {
         public static Bitmap GetImageBitmapFromUrl (string url)

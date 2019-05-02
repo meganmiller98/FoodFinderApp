@@ -15,16 +15,19 @@ using Newtonsoft.Json;
 
 namespace FoodFinder
 {
-    [Activity(Label = "VoucherInfoActivity")]
+    //Voucher Profile Display
+    [Activity(Label = "VoucherInfoActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class VoucherInfoActivity : Activity
     {
         ImageButton saveButton;
         string voucherID;
+        string voucherCode;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.VoucherInfoPage);
 
+            //get voucher info from the voucher results page
             var voucherInfo = JsonConvert.DeserializeObject<Vouchers>(Intent.GetStringExtra("VoucherInfo"));
 
             ImageView voucherImage = FindViewById<ImageView>(Resource.Id.VoucherImage);
@@ -58,10 +61,12 @@ namespace FoodFinder
             deal.Text = voucherInfo.deal;
             contactNumber.Text = voucherInfo.number;
             conditions.Text = voucherInfo.termsOfConditions;
+            voucherCode = voucherInfo.voucherCode;
 
             checkIfUserHasSavedVoucher(voucherID);
 
             saveButton.Click += saveButtonClick;
+            useNowButton.Click += useVoucherClick;
 
             
         }
@@ -73,23 +78,17 @@ namespace FoodFinder
 
             if (userID == null)
             {
-                //Toast.MakeText(this, "User Not Logged In", ToastLength.Short).Show();
                 Console.WriteLine("user not logged in");
             }
             else
             {
                 List<savedVouchers> mVouchers = new List<savedVouchers>();
-                //myIp
-                //string uri = "htp://192.168.0.20:45455/api/savedVouchers/";
 
-                //uni IP
-                string uri = "http://10.201.37.145:45455/api/savedVouchers/";
-
-                //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/savedVouchers/";
-                //string uri = "htp://192.168.1.70:45455/api/favouriteRestaurants/";
+                string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/savedVouchers/";
+                
 
                 string otherhalf = "checkIfSaved?userID=" + userID + "&voucherID=" + voucherID;
-                //string otherhalf = "checkIfSaved?userID=1&restaurantID=1";
+                
                 Uri result = null;
 
                 if (Uri.TryCreate(new Uri(uri), otherhalf, out result))
@@ -111,18 +110,15 @@ namespace FoodFinder
         }
         void saveButtonClick(object sender, EventArgs e)
         {
-            Toast.MakeText(this, "Click", ToastLength.Short).Show();
             ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
             string userID = prefs.GetString("userID", null);
             if (saveButton.Selected == true)
             {
                 saveButton.Selected = false;
-                //Toast.MakeText(this, "true to false", ToastLength.Short).Show();
-
 
                 if (userID == null)
                 {
-                    Toast.MakeText(this, "User Not Logged In", ToastLength.Short).Show();
+                    Console.WriteLine("User Not Logged In");
                 }
                 else
                 {
@@ -158,14 +154,7 @@ namespace FoodFinder
          }
         async void deleteSavedVoucher(string userID)
         {
-            //string uri = "htp://192.168.1.70:45455/api/favouriteRestaurants/";
-
-            //uni
-            //string uri = "htp://10.201.37.145:45455/api/savedVouchers/";
             string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/savedVouchers/";
-
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/savedVouchers/";
 
             string otherhalf = "deleteSaved?userID=" + userID + "&voucherID=" + voucherID;
             Uri result = null;
@@ -181,17 +170,13 @@ namespace FoodFinder
                 }
             }
         }
+
+        //create a savedVouchers object then send to API to insert into database
         async void saveVoucher(string userID)
         {
             savedVouchers save = new savedVouchers(voucherID, userID, null);
 
-            //string uri = "htp://192.168.1.70:45455/api/favouriteRestaurants/Save";
-
-            //uni
-            string uri = "http://10.201.37.145:45455/api/savedVouchers/Save";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/savedVouchers/Save";
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/savedVouchers/Save";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/savedVouchers/Save";
 
             Uri result = new Uri(uri);
             Console.WriteLine(result);
@@ -201,7 +186,6 @@ namespace FoodFinder
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             HttpResponseMessage refineResult = (await httpClient.PostAsync(result, content));
 
-            //await HandleResponse(refineResult);
             string serialized = await refineResult.Content.ReadAsStringAsync();
             Console.WriteLine(serialized);
             if (refineResult.IsSuccessStatusCode)
@@ -213,6 +197,19 @@ namespace FoodFinder
                 Toast.MakeText(this, "Something went wrong", ToastLength.Short).Show();
             }
         }
+
+        //Display voucher code dialog fragment
+        public void useVoucherClick(object sender, EventArgs e)
+        {
+            VoucherCodeDialogFragment voucherCodeDisplay = new VoucherCodeDialogFragment();
+            Bundle args = new Bundle();
+            args.PutString("voucherCode", voucherCode);
+            voucherCodeDisplay.Arguments = args;
+            FragmentTransaction transcation = FragmentManager.BeginTransaction();
+            voucherCodeDisplay.Show(transcation, "voucherCodeDialog");
+        }
+
+        //If coming from user profile, return to user profile when the back button is pressed
         public override bool OnKeyDown(Keycode keyCode, KeyEvent e)
         {
             if (keyCode == Keycode.Back)

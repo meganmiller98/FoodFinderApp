@@ -21,7 +21,6 @@ namespace FoodFinder
         private RecyclerView mRecyclerView;
         private RecyclerView.LayoutManager mLayoutManager;
         private RecyclerView.Adapter mAdapter;
-        //private List<Email> mEmails;
         private List<RestaurantInfo> mRestaurantInfo;
         string getID;
 
@@ -29,7 +28,6 @@ namespace FoodFinder
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your fragment here
         }
         public InfoTabFragment()
         {
@@ -40,55 +38,26 @@ namespace FoodFinder
             View view = inflater.Inflate(Resource.Layout.InfoTab, container, false);
             mRecyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView1);
 
-            /*mEmails = new List<Email>();
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            mEmails.Add(new Email() { Name = "Tom", Subject = "Wanna hang?", Message = "See you tomorrow!" });
-            //Create our layout manager
-            mLayoutManager = new LinearLayoutManager(Context as Activity);
-            mRecyclerView.SetLayoutManager(mLayoutManager);
-            mAdapter = new RecyclerAdapter(mEmails);
-            mRecyclerView.SetAdapter(mAdapter);*/
-
+            //getting the ID of the current restaurant displayed
             getID = RestaurantProfileActivity.sendData();
             if(getID != null)
             {
-                Toast.MakeText(Context as Activity, getID, ToastLength.Short).Show();
                 restaurantInfo(getID);
             }
             else
             {
-                Toast.MakeText(Context as Activity, "Nothing again", ToastLength.Short).Show();
+                Toast.MakeText(Context as Activity, "Something went wrong", ToastLength.Short).Show();
             }
 
             return view;
         }
 
+        //getting the current restaurants general information
         async void restaurantInfo(string getID)
          {
             mRestaurantInfo = new List<RestaurantInfo>();
-             //myIp
-             //string uri = "htp://192.168.0.20:45455/api/Restaurant/";
 
-             //uni IP
-             string uri = "http://10.201.37.145:45455/api/Restaurant/";
-
-            //string uri = "htp://192.168.1.70:45455/api/Restaurant/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Restaurant/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Restaurant/";
 
              string otherhalf = "HomeResults?ID= "+ getID ;
 
@@ -100,8 +69,11 @@ namespace FoodFinder
                  var refineResult = (await httpClient.GetStringAsync(result));
                  mRestaurantInfo = JsonConvert.DeserializeObject<List<RestaurantInfo>>(refineResult);
 
+                //setting up the layout so the information can be displayed
                 mLayoutManager = new LinearLayoutManager(Context as Activity);
                 mRecyclerView.SetLayoutManager(mLayoutManager);
+                
+                //passing the restaurant's information to the adapter
                 mAdapter = new RecyclerAdapter(mRestaurantInfo);
                 mRecyclerView.SetAdapter(mAdapter); 
 
@@ -109,13 +81,10 @@ namespace FoodFinder
 
          }
     }
+
+    //Binding restaurant info with item views in recyclerview
     public class RecyclerAdapter : RecyclerView.Adapter
     {
-        /*private List<Email> mEmails;
-        public RecyclerAdapter(List<Email> emails)
-        {
-            mEmails = emails;
-        }*/
         private List<RestaurantInfo> mRestaurantInfo;
         public RecyclerAdapter (List<RestaurantInfo> restaurantInfo)
         {
@@ -124,6 +93,7 @@ namespace FoodFinder
 
         public class MyView : RecyclerView.ViewHolder
         {
+            //getting and setting the restaurant information
             public View mMainView { get; set; }
             public TextView mDescription { get; set; }
             public TextView mOpenTimesMonday { get; set; }
@@ -153,6 +123,7 @@ namespace FoodFinder
             get { return mRestaurantInfo.Count; }
         }
 
+        //Binding the data so that the information can be displayed in the recycler view within the view holder
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             MyView myHolder = holder as MyView;
@@ -199,6 +170,7 @@ namespace FoodFinder
             TextView textContactNumber = row.FindViewById<TextView>(Resource.Id.ContactNumber);
             TextView textAddress = row.FindViewById<TextView>(Resource.Id.Address);
 
+            //sets the restaurant information to the layout elements specified in the restaurant profile xaml file so all the info can be displayed
             MyView view = new MyView(row)
             {
                 mDescription = textDescription,

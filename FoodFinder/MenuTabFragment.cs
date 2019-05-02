@@ -23,12 +23,10 @@ namespace FoodFinder
         private RecyclerView.Adapter mAdapter;
         private List<MenuType> mMenuType;
         string getID;
-        //public string namewoo;
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -39,29 +37,22 @@ namespace FoodFinder
             getID = RestaurantProfileActivity.sendData();
             if (getID != null)
             {
-                Toast.MakeText(Context as Activity, getID, ToastLength.Short).Show();
                 getMenuTypes(getID);
             }
             else
             {
-                Toast.MakeText(Context as Activity, "Nothing again", ToastLength.Short).Show();
+                Console.WriteLine("can't retrieve restaurant ID");
             }
 
             return view;
         }
 
+        //get the list of menus for the restaurant
         async void getMenuTypes(string getID)
         {
             mMenuType = new List<MenuType>();
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/MenuType/";
 
-            //uni IP
-            string uri = "http://10.201.37.145:45455/api/MenuType/";
-
-            //string uri = "htp://192.168.1.70:45455/api/MenuType/";
-
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/MenuType";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/MenuType/";
 
             string otherhalf = "getMenuTypes?ID= " + getID;
 
@@ -81,6 +72,7 @@ namespace FoodFinder
         }
     }
 
+    //Binding menu type data to view items in recyclerview
     public class MenuTypeRecyclerAdapter : RecyclerView.Adapter
     {
         private List<MenuType> mMenuType;
@@ -118,23 +110,14 @@ namespace FoodFinder
 
             myHolder.mMenu.Text = mMenuType[position].Menu;
             myHolder.mMainView.Click += mMainView_Click;
-
-            //myHolder.mMainView.Click += delegate {
-                
-               // myHolder.mMainView.Context.StartActivity(typeof(ClientLogin));
-            //};
-            //myHolder.mRestaurantID.Text = mMenuType[position].RestaurantID;
-
-
         }
 
         private void mMainView_Click(object sender, EventArgs e)
         {
-
+            //get the index of the menu clicked
             int position = mRecyclerView.GetChildAdapterPosition((View)sender);
-            //int indexPosition = (mMenuType.Count) - position;
-            //string namewoo = (mMenuType[position].Menu);
-            Console.WriteLine(mMenuType[position].Menu);
+
+            //show the menu items for that menu in a new page
             Intent intent = new Intent(mcontext, typeof(MenuDisplayActivity));
             intent.PutExtra("MenuType", mMenuType[position].Menu);
             intent.PutExtra("RestaurantID", mMenuType[position].RestaurantID);

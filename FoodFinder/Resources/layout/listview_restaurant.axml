@@ -23,33 +23,42 @@
 		android:layout_gravity="center_horizontal"
 		android:gravity="center_horizontal"
 		android:layout_marginBottom="2dp" />
-	<LinearLayout
-		android:orientation="horizontal"
+	<RelativeLayout
+		
 		android:minWidth="25px"
 		android:minHeight="25px"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/linearLayout1" >
+		android:id="@+id/linearLayout1">
 		<TextView
-			android:text="Text"
+			android:text="Category"
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:id="@+id/Category"
-			android:layout_marginRight="50dp"
-			android:layout_marginLeft="15dp" />
+			android:layout_marginLeft="15dp"
+			android:layout_alignParentLeft="true" />
 		<TextView
-			android:text="Text"
+			android:text="Time"
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:id="@+id/Time"
-			android:layout_gravity="center"/>
+			android:layout_gravity="center|center_horizontal"
+			android:layout_centerHorizontal="true" />
 		<TextView
-			android:text="Text"
+			android:text="Rating"
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:id="@+id/Rating"
-			android:layout_marginLeft="70dp"
-			android:layout_marginRight="5dp" />
-	</LinearLayout>
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="15dp" 
+			 />
+		<ImageView
+			android:src="@drawable/starIcon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/imageView1"
+			android:layout_toLeftOf="@id/Rating" />
+		
+	</RelativeLayout>
 
 </LinearLayout>

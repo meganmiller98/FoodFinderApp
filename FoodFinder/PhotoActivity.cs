@@ -12,14 +12,14 @@ using Android.Widget;
 
 namespace FoodFinder
 {
-    [Activity(Label = "PhotoActivity")]
+    //displaying the photo clicked on in the restaurant profile page full sized
+    [Activity(Label = "PhotoActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class PhotoActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.PhotoActivityLayout);
-            // Create your application here
 
             string photoFilePath = Intent.GetStringExtra("PhotoFilePath");
             string photoID = Intent.GetStringExtra("PhotoID");

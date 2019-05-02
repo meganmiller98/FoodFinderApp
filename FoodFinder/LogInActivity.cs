@@ -25,8 +25,9 @@ namespace FoodFinder
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            //sets the layout
             SetContentView(Resource.Layout.layoutLogIn);
-            // Create your application here
 
             mLinearLayout = FindViewById<LinearLayout>(Resource.Id.linearLayout1);
             mUsername = FindViewById<EditText>(Resource.Id.userNameInput);
@@ -41,6 +42,7 @@ namespace FoodFinder
             mButton.Click += login_Click;
             signup.Click += signup_Click;
 
+            //input validation
             mUsername.KeyPress += (object sender, View.KeyEventArgs e) => {
                 e.Handled = false;
                 if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
@@ -72,6 +74,7 @@ namespace FoodFinder
                 }
             };
         }
+        //open up sign-up page
         void signup_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(SignUpActivity));
@@ -86,16 +89,11 @@ namespace FoodFinder
             }
 
         }
+
+        //check if user exists
         async void validateUsers()
         {
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/Users/";
-
-            //uni IP
-            string uri = "http://10.201.37.145:45455/api/Users/";
-
-            //string uri = "htp://192.168.1.70:45455/api/Users/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Users/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Users/";
             string otherhalf = "validateUser?email=" + mUsername.Text + "&password=" + mPassword.Text;
 
             Uri result = null;
@@ -111,6 +109,7 @@ namespace FoodFinder
                     string name = users[0].Name;
 
                     // code help from stacktips.com/tutorials/xamarin/shared-preferences-example-in-xamarin-android
+                    //stores credentials to phone but they are not accessible to any other apps
                     ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
                     ISharedPreferencesEditor editor = prefs.Edit();
                     editor.PutString("name", name);
@@ -119,8 +118,7 @@ namespace FoodFinder
                     editor.PutString("password", mPassword.Text);
                     editor.Apply();
 
-                    Toast.MakeText(this, mUsername.Text, ToastLength.Short).Show();
-                    help();
+                    openCorrectPage();
 
                 }
                 else
@@ -131,21 +129,9 @@ namespace FoodFinder
             }
         }
 
-        public void help()
+        //open correct page up
+        public void openCorrectPage()
         {
-           /* ISharedPreferences prefs = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
-            string userID = prefs.GetString("userID", null);
-            string userName = prefs.GetString("username", null);
-            string password = prefs.GetString("password", null);
-
-            if (userName == null || password == null)
-            {
-                Toast.MakeText(this, "not stored", ToastLength.Short).Show();
-            }
-            else
-            {
-                Toast.MakeText(this, userID + " " + userName + " " + password, ToastLength.Short).Show();
-            }*/
 
             if (Intent.GetStringExtra("RestaurantInfo") != null)
             {
@@ -172,15 +158,15 @@ namespace FoodFinder
             }
         }
 
+        //override back button.
         public override bool OnKeyDown(Keycode keyCode, KeyEvent e)
         {
             if (keyCode == Keycode.Back)
             {
-
+                //can't open profile page if user is not logged in so return user to Restaurants Page
                 if (Intent.GetStringExtra("isProfile") != null)
                 {
                     Intent intent = new Intent(this, typeof(MainActivity));
-                    //intent.PutExtra("frgToLoad", "profilePage");
                     StartActivity(intent);
                     Finish();
                     return false;

@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 
 namespace FoodFinder
 {
+    //Displaying restaurants ratings
     public class RatingsFragment : Android.Support.V4.App.Fragment
     {
         private RecyclerView mRecyclerView;
@@ -27,8 +28,6 @@ namespace FoodFinder
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -39,7 +38,7 @@ namespace FoodFinder
             getID = RestaurantProfileActivity.sendData();
             if (getID != null)
             {
-                Toast.MakeText(Context as Activity, getID, ToastLength.Short).Show();
+                //Toast.MakeText(Context as Activity, getID, ToastLength.Short).Show();
                 getRatings(getID);
             }
             else
@@ -52,14 +51,8 @@ namespace FoodFinder
         async void getRatings(string getID)
         {
             mRatings = new List<Ratings>();
-            //myIp
-            //string uri = "htp://192.168.0.20:45455/api/Ratings/";
 
-            //uni IP
-            string uri = "http://10.201.37.145:45455/api/Ratings/";
-
-            //string uri = "htp://192.168.1.70:45455/api/Ratings/";
-            //string uri = "htps://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Ratings/";
+            string uri = "https://zeno.computing.dundee.ac.uk/2018-projects/foodfinder/api/Ratings/";
 
             string otherhalf = "getRatings?ID= " + getID;
 
@@ -80,13 +73,10 @@ namespace FoodFinder
 
         }
     }
+
+    //Provides a binding from ratings data set to rating views that are displayed within the RecyclerView
     public class RatingsRecyclerAdapter : RecyclerView.Adapter
     {
-        /*private List<Email> mEmails;
-        public RecyclerAdapter(List<Email> emails)
-        {
-            mEmails = emails;
-        }*/
         private List<Ratings> mRatings;
         public RatingBar ratingBar;
         float x;
@@ -120,8 +110,11 @@ namespace FoodFinder
         {
             MyRatingView myHolder = holder as MyRatingView;
 
+            //get rating number
             x = float.Parse(mRatings[position].rating, CultureInfo.InvariantCulture.NumberFormat);
             myHolder.mName.Text = mRatings[position].name;
+
+            //sets the rating on the rating bar in view
             ratingBar.Rating = x;
         }
 
@@ -134,15 +127,11 @@ namespace FoodFinder
             ratingBar = row.FindViewById<RatingBar>(Resource.Id.ratingBar1);
             ratingBar.Clickable = false;
             ratingBar.IsIndicator = true;
-            //mratingBar.Rating = x;
 
 
             MyRatingView view = new MyRatingView(row)
             {
-                mName = textName,
-                //ratingBar = mratingBar
-                //ratingBar = mratingBar
-                
+                mName = textName,                
             };
             return view;
         }

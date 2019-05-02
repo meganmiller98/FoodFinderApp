@@ -62,6 +62,7 @@ namespace FoodFinder
             applyButton = view.FindViewById<Button>(Resource.Id.applyButton);
             applyButton.Click += button_Click_Apply;
 
+            //Only one option from each category: sort, dietary and open now can be selected at any given time
             if(Arguments != null)
             {
                 if(Arguments.GetString("sort") != null)
@@ -127,9 +128,6 @@ namespace FoodFinder
             
             option = Arguments.GetString("option");
             searchedString = Arguments.GetString("searchedString");
-
-            //distanceBox.Checked = true;
-            //noDietary.Checked = true;
 
             distanceBox.Click += (o, e) =>
             {
@@ -326,6 +324,7 @@ namespace FoodFinder
                 openNow = "no";
             }
 
+            //send refinements to search results page
             searchResultsPage fragment = new searchResultsPage();
             Bundle args = new Bundle();
             args.PutString("sort", sort);
@@ -337,10 +336,10 @@ namespace FoodFinder
 
             var fragmentTransaction = FragmentManager.BeginTransaction();
             fragmentTransaction.Replace(Resource.Id.frame, fragment);
-            //CHECK IF  THIS IS ACCURATE
+            
             FragmentManager.PopBackStackImmediate();
             fragmentTransaction.AddToBackStack("SearchFragmentActual");
-            //FragmentManager.PopBackStackImmediate();
+            
             fragmentTransaction.Commit();
 
 
